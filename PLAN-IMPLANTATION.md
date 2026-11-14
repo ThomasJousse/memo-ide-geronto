@@ -30,7 +30,7 @@ Plan rédigé le 14/11/2026. Nom de travail : **Mémo IDE Géronto** (à changer
 - **Coque native** : **Capacitor 7** (Android). Plugins : StatusBar, SplashScreen, App (bouton retour), Preferences (favoris, taille de texte).
 - **Build APK** : **GitHub Actions** sur `ubuntu-latest` (Java 17 + Android SDK via le wrapper Gradle). Aucune installation Android Studio sur ton PC.
 - **Distribution** : GitHub Releases. L'APK signé est attaché à chaque release ; Ophélie l'installe depuis son téléphone (autorisation « sources inconnues » une seule fois). Pas de Google Play.
-- **Version web** : le même build en PWA (installable sur iPhone / PC, hors ligne via service worker). Utile en cas de changement de téléphone. GitHub Pages est refusé sur un dépôt privé en plan gratuit (constaté le 14/11) : le workflow reste en déclenchement manuel ; au moment voulu, soit passer le dépôt en public, soit déployer sur Netlify (gratuit, compatible dépôt privé).
+- **Version web** : le même build publié sur GitHub Pages (https://thomasjousse.github.io/memo-ide-geronto/), le dépôt étant public depuis le 14/11/2026. Le service worker (installation hors ligne sur iPhone / PC) reste à ajouter.
 
 ### 2.2 Pourquoi pas Flutter, React Native ou Kotlin natif
 
@@ -182,7 +182,7 @@ Chaque phase = 1 ou plusieurs sessions Claude Code dans le dépôt. Durée indic
 |---|---|---|---|---|
 | **0. Cadrage** | Ce plan, validation du périmètre et du nom avec Ophélie | PLAN-IMPLANTATION.md | fait | Opus 5.5 élevé (rédigé ici par Fable 5.1) |
 | **1. Socle technique** | Dépôt GitHub, Vite, Capacitor Android, icône et splash, workflows APK debug et release signée, keystore | **Fait le 14/11/2026** : release v0.1.0 avec APK signé sur github.com/ThomasJousse/memo-ide-geronto | 2 à 3 h | Sonnet 5.5 moyen (fait par Fable 5.1) |
-| **2. Moteur** | Portage du moteur du Mémo (recherche, synonymes, fiches, chapitres, récents, mode sombre), pipeline Markdown→JSON, moteur d'échelles YAML, calculateurs, favoris, taille de texte, « mise à jour disponible » | App fonctionnelle avec 5 fiches de test et 2 échelles | 4 à 6 h | Sonnet 5.5 moyen (Opus 5.5 pour le moteur d'échelles) |
+| **2. Moteur** | Portage du moteur du Mémo (recherche, synonymes, fiches, chapitres, récents, mode sombre), pipeline Markdown→JSON, moteur d'échelles YAML, calculateurs, favoris, taille de texte, « mise à jour disponible » | **Fait le 14/11/2026 (v0.2.0)** : 3 types d'échelles (CAM, mini-GDS, GDS-15, MNA-SF, AGGIR vérifiée contre l'annexe officielle), 7 calculateurs, favoris, taille de texte, bandeau de mise à jour | 4 à 6 h | Sonnet 5.5 moyen (fait par Fable 5.1) |
 | **3. Contenu — lot A** | Ch. 1 Situations aiguës + Ch. 2 Syndromes gériatriques | 65 fiches, sources citées | 6 à 8 h | Opus 5.5 élevé |
 | **4. Contenu — lot B** | Ch. 4 Échelles (35 YAML + fiches) + Ch. 11 Calculateurs | Échelles interactives validées sur cas tests | 6 à 8 h | Opus 5.5 élevé |
 | **5. Contenu — lot C** | Ch. 3 Neurocognitif + Ch. 10 Communication | 37 fiches | 4 à 5 h | Opus 5.5 élevé |

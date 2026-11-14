@@ -1,0 +1,25 @@
+id: mini-gds
+title: Mini-GDS — dépistage de la dépression en 4 questions
+short: Mini-GDS
+type: sum
+entry: mini-gds
+tags: dépression, GDS, mini-GDS, humeur, tristesse, dépistage, 4 questions
+resume: 4 questions oui/non. Un score ≥ 1 = forte probabilité de dépression, à confirmer par la GDS-15 et l'avis médical.
+sources: Clément JP et al., L'Encéphale 1997 ; HAS 2017 Repérage de la dépression de la personne âgée
+intro: "Poser les questions telles quelles, en précisant : « Comment vous sentez-vous depuis une semaine ? »"
+items:
+  - id: q1
+    label: "Vous sentez-vous souvent découragé(e) et triste ?"
+    options: [{ label: "Oui", points: 1 }, { label: "Non", points: 0 }]
+  - id: q2
+    label: "Avez-vous le sentiment que votre vie est vide ?"
+    options: [{ label: "Oui", points: 1 }, { label: "Non", points: 0 }]
+  - id: q3
+    label: "Êtes-vous heureux(se) la plupart du temps ?"
+    options: [{ label: "Oui", points: 0 }, { label: "Non", points: 1 }]
+  - id: q4
+    label: "Avez-vous l'impression que votre situation est désespérée ?"
+    options: [{ label: "Oui", points: 1 }, { label: "Non", points: 0 }]
+ranges:
+  - { max: 0, text: "Score 0 : forte probabilité d'absence de dépression.", level: ok }
+  - { max: 4, text: "Score ≥ 1 : forte probabilité de dépression. Compléter par la GDS-15, évaluer le risque suicidaire, avis médical.", level: warn, link: gds-15 }

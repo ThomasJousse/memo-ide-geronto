@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSy
 import { join, relative, basename } from "node:path";
 import yaml from "js-yaml";
 import { marked } from "marked";
+import { CALCULATORS } from "../src/calculators.js";
 
 const ROOT = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const CONTENT = join(ROOT, "content");
@@ -84,18 +85,41 @@ for (const file of walk(join(CONTENT, "scales"), ".yaml")) {
   const rel = relative(CONTENT, file).replace(/\\/g, "/");
   try {
     const s = yaml.load(readFileSync(file, "utf8"));
-    if (!s.id || !s.title || !s.items) problems.push(`${rel} : échelle incomplète (id, title, items)`);
+    const list = s.items || s.variables;
+    if (!s.id || !s.title || !s.type || !list) { problems.push(`${rel} : échelle incomplète (id, title, type, items/variables)`); continue; }
+    if (!s.sources) problems.push(`${rel} : pas de « sources »`);
+    const itemIds = new Set();
+    for (const i of list) { if (!i.id || !i.label) problems.push(`${rel} : item sans id ou label`); if (itemIds.has(i.id)) problems.push(`${rel} : item « ${i.id} » en double`); itemIds.add(i.id); }
+    if (s.type === "criteria") {
+      if (!s.rule || !s.interpretation?.positive || !s.interpretation?.negative) problems.push(`${rel} : criteria sans rule/interpretation`);
+      for (const u of String(s.rule || "").match(/[a-z][a-z0-9_]*/gi) || []) if (!itemIds.has(u)) problems.push(`${rel} : la règle cite un item inconnu « ${u} »`);
+    } else if (s.type === "sum") {
+      let max = 0;
+      for (const i of s.items) {
+        if (i.options) { if (!Array.isArray(i.options) || i.options.some((o) => typeof o.points !== "number" || !o.label)) problems.push(`${rel} : options invalides pour « ${i.id} »`); else max += Math.max(...i.options.map((o) => o.points)); }
+        else if (i.scores) { if (!["oui", "non"].includes(i.scores)) problems.push(`${rel} : scores doit valoir oui ou non (« ${i.id} »)`); max += 1; }
+        else max += Number(i.points ?? 1);
+      }
+      if (!Array.isArray(s.ranges) || !s.ranges.length) problems.push(`${rel} : sum sans ranges`);
+      else { const top = Math.max(...s.ranges.map((r) => r.max ?? Infinity)); if (top < max) problems.push(`${rel} : les tranches s'arrêtent à ${top} mais le score max est ${max}`); for (const r of s.ranges) if (!r.text || !["ok", "warn", "crit"].includes(r.level)) problems.push(`${rel} : tranche sans text/level valide`); }
+    } else if (s.type === "grid") {
+      const need = ["coh", "ori", "toi", "hab", "ali", "eli", "tra", "din", "dex", "ale"];
+      for (const v of need) if (!itemIds.has(v)) problems.push(`${rel} : variable AGGIR manquante « ${v} »`);
+      for (const v of s.variables) if (v.sub && !["toilette", "habillage", "alimentation", "elimination", "orientation", "coherence"].includes(v.combine)) problems.push(`${rel} : règle combine inconnue pour « ${v.id} »`);
+    } else problems.push(`${rel} : type inconnu « ${s.type} »`);
     scales.push(s);
   } catch (e) { problems.push(`${rel} : YAML invalide (${e.message})`); }
 }
+for (const s of scales) if (s.entry && !ids.has(s.entry)) problems.push(`scales/${s.id} : fiche « entry: ${s.entry} » introuvable`);
+for (const s of scales) for (const r of [...(s.ranges || []), s.interpretation?.positive, s.interpretation?.negative]) if (r?.link && !ids.has(r.link) && !CALCULATORS.some((c) => `calc-${c.id}` === r.link) && !scales.some((x) => `scale-${x.id}` === r.link)) problems.push(`scales/${s.id} : lien « ${r.link} » introuvable`);
 
 /* ---------- Liens internes ---------- */
-const all = new Set([...ids, ...scales.map((s) => `scale-${s.id}`)]);
+const all = new Set([...ids, ...scales.map((s) => `scale-${s.id}`), ...CALCULATORS.map((c) => `calc-${c.id}`)]);
 for (const e of entries) {
   for (const m of e.html.matchAll(/href="#e-([a-z0-9-]+)"/g)) if (!all.has(m[1])) problems.push(`${e.id} : lien vers fiche inconnue « ${m[1]} »`);
 }
 // Les raccourcis d'accueil peuvent pointer vers des fiches pas encore écrites : simple avertissement.
-const pending = [...(home.sos || []), ...(home.quick || [])].filter((id) => !all.has(id));
+const pending = [...(home.sos || []), ...(home.quick || [])].filter((id) => !all.has(id) && !id.startsWith("calc-"));
 if (pending.length) console.warn(`home.yaml : ${pending.length} raccourci(s) vers des fiches à écrire : ${pending.join(", ")}`);
 
 /* ---------- Sortie ---------- */

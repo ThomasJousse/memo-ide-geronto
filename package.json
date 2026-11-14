@@ -1,12 +1,13 @@
 {
   "name": "memo-ide-geronto",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Mémo IDE Géronto — carnet de poche hors ligne pour infirmière d'équipe mobile de gériatrie",
   "type": "module",
   "scripts": {
     "content": "node scripts/build-content.mjs",
     "check": "node scripts/build-content.mjs --check",
+    "test": "node scripts/test-aggir.mjs",
     "dev": "npm run content && vite",
     "build": "npm run content && vite build",
     "preview": "vite preview",

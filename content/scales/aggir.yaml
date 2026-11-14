@@ -1,0 +1,68 @@
+id: aggir
+title: Grille AGGIR — calcul du GIR
+short: AGGIR / GIR
+type: grid
+entry: aggir
+order: 30
+tags: AGGIR, GIR, autonomie, dépendance, APA, grille, cohérence, orientation, toilette, habillage, alimentation, élimination, transferts, déplacements
+resume: Coder les 10 variables discriminantes en A, B ou C ; l'algorithme officiel donne le GIR (1 = dépendance la plus lourde, 6 = autonome). GIR 1 à 4 ouvrent droit à l'APA.
+sources: Décret n° 2008-821 du 21 août 2008, annexe 2 (algorithme) et annexe 2-1 (guide d'évaluation) du CASF ; pour-les-personnes-agees.gouv.fr
+intro: "Observer ce que la personne fait seule, pas ce qu'elle pourrait faire. Chaque variable se code A, B ou C d'après les quatre adverbes. Les déplacements extérieurs et l'alerte sont relevés pour le dossier mais ne comptent pas dans le calcul du GIR."
+variables:
+  - id: coh
+    label: Cohérence
+    help: "Communiquer (verbal ou non verbal), agir et se comporter de façon logique et sensée par rapport aux normes admises. L'incohérence n'est ni un diagnostic psychiatrique ni un trait de caractère : c'est un constat d'observation pluridisciplinaire."
+    combine: coherence
+    sub:
+      - { id: communication, label: Communication }
+      - { id: comportement, label: Comportement }
+  - id: ori
+    label: Orientation
+    help: "Se repérer dans le temps (saisons, moment de la journée, année, mois ; la date exacte peut normalement être ignorée) et dans les lieux habituels comme nouveaux."
+    combine: orientation
+    sub:
+      - { id: temps, label: Dans le temps }
+      - { id: espace, label: Dans l'espace }
+  - id: toi
+    label: Toilette
+    help: "Assurer son hygiène corporelle. Haut : visage, tronc, membres supérieurs, mains, rasage, coiffage. Bas : régions intimes, membres inférieurs, pieds."
+    combine: toilette
+    sub:
+      - { id: haut, label: Haut du corps }
+      - { id: bas, label: Bas du corps }
+  - id: hab
+    label: Habillage
+    help: "S'habiller, se déshabiller, se présenter. Haut : vêtements passés par les bras ou la tête. Moyen : boutons, fermetures, ceinture, bretelles. Bas : vêtements passés par le bas du corps, chaussettes, chaussures."
+    combine: habillage
+    sub:
+      - { id: haut, label: Haut }
+      - { id: moyen, label: Moyen (fermetures) }
+      - { id: bas, label: Bas }
+  - id: ali
+    label: Alimentation
+    help: Se servir (couper la viande, ouvrir un pot, se verser à boire) et manger les aliments préparés.
+    combine: alimentation
+    sub:
+      - { id: servir, label: Se servir }
+      - { id: manger, label: Manger }
+  - id: eli
+    label: Élimination
+    help: Assurer l'hygiène de l'élimination urinaire et fécale (il s'agit de l'hygiène, pas de la continence).
+    combine: elimination
+    sub:
+      - { id: urinaire, label: Urinaire }
+      - { id: fecale, label: Fécale }
+  - id: tra
+    label: Transferts
+    help: Se lever, se coucher, s'asseoir, passer d'une position à une autre.
+  - id: din
+    label: Déplacements à l'intérieur
+    help: Se déplacer dans le lieu de vie, avec ou sans canne, déambulateur, fauteuil roulant.
+  - id: dex
+    label: Déplacements à l'extérieur
+    discriminant: false
+    help: Se déplacer à partir de la porte d'entrée, sans moyen de transport.
+  - id: ale
+    label: Alerter
+    discriminant: false
+    help: Utiliser un moyen de communication à distance (téléphone, alarme, sonnette) pour alerter en cas de besoin.

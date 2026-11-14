@@ -1,0 +1,30 @@
+id: gds-15
+title: GDS-15 — échelle de dépression gériatrique (15 items)
+short: GDS-15
+type: sum
+entry: gds-15
+tags: dépression, GDS, GDS-15, Yesavage, humeur, échelle, 15 items
+resume: 15 questions oui/non sur la semaine écoulée. 0 à 4 normal, 5 à 9 dépression probable, 10 et plus dépression sévère probable.
+sources: Sheikh JI, Yesavage JA 1986 ; traduction française validée ; HAS 2017 Repérage de la dépression de la personne âgée
+intro: "« Comment vous êtes-vous senti(e) au cours de la semaine passée ? » Répondre par oui ou non. Non valide en cas de trouble cognitif sévère (MMSE < 15) : préférer l'échelle de Cornell."
+yesno: true
+items:
+  - { id: q1, label: "Êtes-vous satisfait(e) de votre vie ?", scores: non }
+  - { id: q2, label: "Avez-vous renoncé à un grand nombre de vos activités et de vos centres d'intérêt ?", scores: oui }
+  - { id: q3, label: "Avez-vous le sentiment que votre vie est vide ?", scores: oui }
+  - { id: q4, label: "Vous ennuyez-vous souvent ?", scores: oui }
+  - { id: q5, label: "Êtes-vous de bonne humeur la plupart du temps ?", scores: non }
+  - { id: q6, label: "Avez-vous peur que quelque chose de mauvais vous arrive ?", scores: oui }
+  - { id: q7, label: "Vous sentez-vous heureux(se) la plupart du temps ?", scores: non }
+  - { id: q8, label: "Vous sentez-vous souvent abandonné(e) ?", scores: oui }
+  - { id: q9, label: "Préférez-vous rester à la maison plutôt que de sortir et de faire de nouvelles choses ?", scores: oui }
+  - { id: q10, label: "Avez-vous l'impression d'avoir plus de problèmes de mémoire que la plupart des gens ?", scores: oui }
+  - { id: q11, label: "Pensez-vous qu'il est merveilleux d'être en vie actuellement ?", scores: non }
+  - { id: q12, label: "Vous sentez-vous plutôt inutile dans votre état actuel ?", scores: oui }
+  - { id: q13, label: "Vous sentez-vous plein(e) d'énergie ?", scores: non }
+  - { id: q14, label: "Pensez-vous que votre situation est désespérée ?", scores: oui }
+  - { id: q15, label: "Pensez-vous que la plupart des gens vont mieux que vous ?", scores: oui }
+ranges:
+  - { max: 4, text: "0 à 4 : pas de dépression décelée.", level: ok }
+  - { max: 9, text: "5 à 9 : dépression probable (légère à modérée). Avis médical, évaluer le risque suicidaire.", level: warn }
+  - { max: 15, text: "10 à 15 : dépression sévère probable. Avis médical rapide, évaluer le risque suicidaire.", level: crit }

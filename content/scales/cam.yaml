@@ -1,13 +1,18 @@
 id: cam
 title: CAM — Confusion Assessment Method
+short: CAM
 type: criteria
 entry: cam
+order: 1
+tags: confusion, delirium, CAM, dépistage, inattention, fluctuation, vigilance
+resume: Positive si début brutal et fluctuant + inattention + (pensée désorganisée ou vigilance altérée). À refaire à chaque poste tant que l'état fluctue.
+sources: Inouye SK et al., Ann Intern Med 1990 ; HAS 2009 Confusion aiguë chez la personne âgée
 items:
-  - { id: a, label: "Début brutal et évolution fluctuante" }
-  - { id: b, label: "Inattention" }
-  - { id: c, label: "Désorganisation de la pensée" }
-  - { id: d, label: "Altération de la vigilance" }
+  - { id: a, label: "Début brutal et évolution fluctuante", help: "Changement aigu par rapport à l'état habituel, qui varie dans la journée (demander à la famille ou à l'aide-soignante)." }
+  - { id: b, label: "Inattention", help: "Difficulté à fixer son attention, facilement distrait : mois de l'année à l'envers, compter de 20 à 1." }
+  - { id: c, label: "Désorganisation de la pensée", help: "Discours décousu, incohérent, passe du coq à l'âne, raisonnement illogique." }
+  - { id: d, label: "Altération de la vigilance", help: "Tout état autre qu'alerte : hypervigilant, somnolent, stuporeux, comateux." }
 rule: "a && b && (c || d)"
 interpretation:
-  positive: { text: "CAM positive : confusion aiguë probable → fiche Confusion aiguë", level: crit, link: confusion-aigue }
-  negative: { text: "CAM négative à cet instant (réévaluer si fluctuation)", level: ok }
+  positive: { text: "CAM positive : confusion aiguë probable. Chercher la cause et prévenir le médecin.", level: crit, link: confusion-aigue }
+  negative: { text: "CAM négative à cet instant. Réévaluer si l'état fluctue.", level: ok }

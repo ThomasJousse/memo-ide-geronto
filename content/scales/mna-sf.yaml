@@ -1,0 +1,53 @@
+id: mna-sf
+title: MNA-SF — Mini Nutritional Assessment, forme courte
+short: MNA-SF
+type: sum
+entry: mna-sf
+tags: MNA, dénutrition, nutrition, appétit, perte de poids, IMC, mollet, dépistage nutritionnel
+resume: 6 items, score sur 14. 12 à 14 état nutritionnel normal, 8 à 11 risque de dénutrition, 0 à 7 dénutrition.
+sources: Kaiser MJ et al., J Nutr Health Aging 2009 ; Nestlé Nutrition Institute ; HAS 2021 Dénutrition ≥ 70 ans
+intro: "Dépistage. Le diagnostic de dénutrition repose ensuite sur les critères HAS 2021 (IMC, perte de poids, masse musculaire + critère étiologique)."
+items:
+  - id: a
+    label: "A. Le patient a-t-il moins mangé ces 3 derniers mois par manque d'appétit, problèmes digestifs, difficultés de mastication ou de déglutition ?"
+    options:
+      - { label: "Baisse sévère des prises alimentaires", points: 0 }
+      - { label: "Légère baisse", points: 1 }
+      - { label: "Pas de baisse", points: 2 }
+  - id: b
+    label: "B. Perte récente de poids (moins de 3 mois)"
+    options:
+      - { label: "Perte de poids > 3 kg", points: 0 }
+      - { label: "Ne sait pas", points: 1 }
+      - { label: "Perte de poids entre 1 et 3 kg", points: 2 }
+      - { label: "Pas de perte de poids", points: 3 }
+  - id: c
+    label: "C. Motricité"
+    options:
+      - { label: "Du lit au fauteuil", points: 0 }
+      - { label: "Autonome à l'intérieur", points: 1 }
+      - { label: "Sort du domicile", points: 2 }
+  - id: d
+    label: "D. Maladie aiguë ou stress psychologique lors des 3 derniers mois ?"
+    options:
+      - { label: "Oui", points: 0 }
+      - { label: "Non", points: 2 }
+  - id: e
+    label: "E. Problèmes neuropsychologiques"
+    options:
+      - { label: "Démence ou dépression sévère", points: 0 }
+      - { label: "Démence légère", points: 1 }
+      - { label: "Pas de problème psychologique", points: 2 }
+  - id: f
+    label: "F. IMC (ou, si l'IMC n'est pas disponible, circonférence du mollet)"
+    options:
+      - { label: "IMC < 19", points: 0 }
+      - { label: "IMC 19 à < 21", points: 1 }
+      - { label: "IMC 21 à < 23", points: 2 }
+      - { label: "IMC ≥ 23", points: 3 }
+      - { label: "Mollet < 31 cm (IMC indisponible)", points: 0 }
+      - { label: "Mollet ≥ 31 cm (IMC indisponible)", points: 3 }
+ranges:
+  - { max: 7, text: "0 à 7 : dénutrition. Appliquer les critères HAS 2021, peser, bilan albumine/CRP, avis médical et diététique.", level: crit, link: calc-imc }
+  - { max: 11, text: "8 à 11 : risque de dénutrition. Surveiller le poids chaque semaine, enrichir, rechercher la cause.", level: warn, link: calc-imc }
+  - { max: 14, text: "12 à 14 : état nutritionnel normal. Refaire le dépistage à chaque hospitalisation ou tous les 3 mois en EHPAD.", level: ok }
