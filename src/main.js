@@ -9,6 +9,7 @@ import { CALCULATORS } from "./calculators.js";
 import { renderCalc } from "./calc-ui.js";
 import { getFavs, isFav, toggleFav, getRecent, pushRecent, getSize, applySize, nextSize } from "./prefs.js";
 import { checkForUpdate } from "./update.js";
+import { renderAnnuaire } from "./annuaire.js";
 
 const CATS = DATA.chapters;
 const CAT_ORDER = Object.keys(CATS);
@@ -16,7 +17,8 @@ const CAT_ORDER = Object.keys(CATS);
 /* ---------- Corpus : fiches + échelles + calculateurs ---------- */
 const scaleEntries = (DATA.scales || []).map((s) => ({ id: `scale-${s.id}`, cat: "echelles", kind: "scale", scale: s, title: s.title, short: s.short || "", tags: s.tags || "", resume: s.resume || "", sources: s.sources || "", updated: s.updated ? String(s.updated) : "", order: s.order ?? 500, text: scaleSearchText(s), html: "" }));
 const calcEntries = CALCULATORS.map((c, i) => ({ id: `calc-${c.id}`, cat: "calc", kind: "calc", calc: c, title: c.title, short: c.short || "", tags: c.tags || "", resume: c.resume || "", sources: c.sources || "", order: i, text: "", html: "" }));
-const E = [...DATA.entries, ...scaleEntries, ...calcEntries];
+const annuaireEntry = { id: "annuaire", cat: "reperes", kind: "annuaire", title: "Annuaire local (à compléter)", short: "Annuaire", tags: "annuaire, téléphone, numéros, contacts, DAC, HAD, EMSP, astreinte, assistante sociale", resume: "Vos contacts professionnels du territoire, enregistrés sur ce téléphone uniquement.", order: 0, text: "", html: "" };
+const E = [...DATA.entries, ...scaleEntries, ...calcEntries, annuaireEntry];
 const byId = Object.fromEntries(E.map((e) => [e.id, e]));
 const scaleForEntry = Object.fromEntries(scaleEntries.filter((s) => s.scale.entry).map((s) => [s.scale.entry, s.id]));
 for (const e of E) { e._t = norm(e.title); e._g = norm(e.tags); e._r = norm(e.resume); e._x = norm(e.text); }
@@ -114,7 +116,7 @@ function renderEntry(id) {
     ${linkedEntry ? `<a class="cta soft" href="#e-${linkedEntry}">Fiche explicative : ${esc(byId[linkedEntry].title)} →</a>` : ""}
     ${sourcesHTML(e)}${DISCLAIMER}</article></div>`;
   const tool = app.querySelector(".tool");
-  if (e.kind === "scale") renderScale(e.scale, tool, byId); else if (e.kind === "calc") renderCalc(e.calc, tool); else tool.remove();
+  if (e.kind === "scale") renderScale(e.scale, tool, byId); else if (e.kind === "calc") renderCalc(e.calc, tool); else if (e.kind === "annuaire") renderAnnuaire(tool); else tool.remove();
   window.scrollTo(0, 0);
 }
 function renderSearch(q) {
@@ -136,6 +138,7 @@ function route() {
   if (qInput.value && !h.startsWith("#q=")) { qInput.value = ""; clearBtn.hidden = true; }
   if (h.startsWith("#e-")) return renderEntry(h.slice(3));
   if (h.startsWith("#c-")) return renderCat(h.slice(3));
+  if (h === "#annuaire") return renderEntry("annuaire");
   if (h.startsWith("#q=")) { qInput.value = h.slice(3); clearBtn.hidden = false; return renderSearch(h.slice(3)); }
   renderHome();
 }

@@ -115,7 +115,7 @@ for (const s of scales) if (s.entry && !ids.has(s.entry)) problems.push(`scales/
 for (const s of scales) for (const r of [...(s.ranges || []), s.interpretation?.positive, s.interpretation?.negative]) if (r?.link && !ids.has(r.link) && !CALCULATORS.some((c) => `calc-${c.id}` === r.link) && !scales.some((x) => `scale-${x.id}` === r.link)) problems.push(`scales/${s.id} : lien « ${r.link} » introuvable`);
 
 /* ---------- Liens internes ---------- */
-const all = new Set([...ids, ...scales.map((s) => `scale-${s.id}`), ...CALCULATORS.map((c) => `calc-${c.id}`)]);
+const all = new Set([...ids, ...scales.map((s) => `scale-${s.id}`), ...CALCULATORS.map((c) => `calc-${c.id}`), "annuaire"]);
 for (const e of entries) {
   for (const m of e.html.matchAll(/href="#e-([a-z0-9-]+)"/g)) if (!all.has(m[1])) problems.push(`${e.id} : lien vers fiche inconnue « ${m[1]} »`);
 }

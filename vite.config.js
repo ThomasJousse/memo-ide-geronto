@@ -12,6 +12,7 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: true,
     target: "es2020",
+    chunkSizeWarningLimit: 2500,
   },
   server: { port: 5173 },
 });
