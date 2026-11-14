@@ -45,7 +45,7 @@ jobs:
           chmod +x android/gradlew
           cd android && ./gradlew assembleDebug --no-daemon
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: memo-ide-geronto-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
