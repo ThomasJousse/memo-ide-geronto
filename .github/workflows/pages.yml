@@ -1,9 +1,9 @@
 name: Version web (GitHub Pages)
 
+# GitHub Pages n'est pas disponible pour un dépôt privé sur le plan gratuit.
+# Déclenchement manuel uniquement ; à réactiver sur push si le dépôt devient public
+# (ou remplacer par un déploiement Netlify / Cloudflare Pages).
 on:
-  push:
-    branches: [main]
-    paths-ignore: ["android/**", "docs/**", "**.md"]
   workflow_dispatch:
 
 permissions:
