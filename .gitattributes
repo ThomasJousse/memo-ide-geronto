@@ -1,0 +1,6 @@
+# Fins de ligne LF dans le dépôt (le build tourne sur Linux) ; Windows lit LF sans problème.
+* text=auto eol=lf
+*.bat text eol=crlf
+android/gradlew text eol=lf
+*.png binary
+*.jks binary
