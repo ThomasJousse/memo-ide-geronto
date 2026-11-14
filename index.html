@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#1D5A93">
+  <title>Mémo IDE Géronto</title>
+  <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div class="brand">
+        <a href="#" id="home-link"><span class="brand-name">Mémo IDE <span>Géronto</span></span></a>
+        <span class="brand-meta" id="brand-meta"></span>
+      </div>
+      <div class="search" role="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" autocomplete="off" placeholder="Rechercher : confusion, MMSE, chute, GIR…" aria-label="Rechercher une fiche">
+        <button class="clear" id="clear" type="button" aria-label="Effacer la recherche" hidden>×</button>
+      </div>
+    </div>
+  </header>
+  <main id="app" aria-live="polite"></main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

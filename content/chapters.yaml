@@ -1,0 +1,61 @@
+# Chapitres de l'app, dans l'ordre d'affichage. La clé = valeur du champ « cat » des fiches.
+urgences:
+  n: "1"
+  label: Situations aiguës de la personne âgée
+  short: Aigu
+  sub: Présentations atypiques, chute, confusion, déshydratation, sepsis
+syndromes:
+  n: "2"
+  label: Syndromes gériatriques
+  short: Syndromes
+  sub: Fragilité, dénutrition, escarres, incontinence, douleur, iatrogénie
+neurocog:
+  n: "3"
+  label: Troubles neurocognitifs et comportement
+  short: Neurocog
+  sub: Alzheimer, Lewy, Parkinson, SCPD, communication
+echelles:
+  n: "4"
+  label: Échelles et évaluation gériatrique
+  short: Échelles
+  sub: MMSE, CAM, GDS, ADL/IADL, AGGIR, MNA, Braden, TUG, Algoplus
+pharma:
+  n: "5"
+  label: Pharmacologie du sujet âgé
+  short: Pharmaco
+  sub: Fonction rénale, médicaments inappropriés, psychotropes, déprescription
+medocs:
+  n: "6"
+  label: Médicaments de A à Z
+  short: Médicaments
+  sub: Fiches par molécule, posologie sujet âgé, écrasable ou non
+soins:
+  n: "7"
+  label: Soins, gestes et prévention
+  short: Soins
+  sub: Hypodermoclyse, escarres, contention, nutrition, fin de vie
+bio:
+  n: "8"
+  label: Biologie du sujet âgé
+  short: Biologie
+  sub: DFG, ionogramme, albumine, bilans types, valeurs critiques
+parcours:
+  n: "9"
+  label: Parcours, filière et cadre
+  short: Parcours
+  sub: Missions EMG, PPS, orientation, APA, protection juridique, DLU
+communication:
+  n: "10"
+  label: Communication, relation, éthique
+  short: Relation
+  sub: Aidants, refus de soins, bientraitance, annonce
+calc:
+  n: "11"
+  label: Calculateurs
+  short: Calculs
+  sub: Cockcroft, CKD-EPI, GIR, IMC, équianalgésie, QTc
+reperes:
+  n: "12"
+  label: Repères et annuaire
+  short: Repères
+  sub: Sigles, numéros utiles, annuaire local, check-lists

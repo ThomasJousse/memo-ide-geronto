@@ -1,0 +1,20 @@
+# Raccourcis de l'écran d'accueil (ids de fiches). Une fiche absente est ignorée.
+sos:
+  - chute
+  - confusion-aigue
+  - deshydratation
+  - sepsis-sujet-age
+  - fausse-route
+  - avc
+  - hypoglycemie
+  - acr-sujet-age
+quick:
+  - cam
+  - mmse
+  - gds-15
+  - adl-iadl
+  - mna
+  - braden
+  - tug
+  - algoplus
+  - aggir

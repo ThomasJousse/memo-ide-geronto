@@ -1,0 +1,13 @@
+id: cam
+title: CAM — Confusion Assessment Method
+type: criteria
+entry: cam
+items:
+  - { id: a, label: "Début brutal et évolution fluctuante" }
+  - { id: b, label: "Inattention" }
+  - { id: c, label: "Désorganisation de la pensée" }
+  - { id: d, label: "Altération de la vigilance" }
+rule: "a && b && (c || d)"
+interpretation:
+  positive: { text: "CAM positive : confusion aiguë probable → fiche Confusion aiguë", level: crit, link: confusion-aigue }
+  negative: { text: "CAM négative à cet instant (réévaluer si fluctuation)", level: ok }
