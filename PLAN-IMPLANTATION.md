@@ -183,15 +183,15 @@ Chaque phase = 1 ou plusieurs sessions Claude Code dans le dépôt. Durée indic
 | **0. Cadrage** | Ce plan, validation du périmètre et du nom avec Ophélie | PLAN-IMPLANTATION.md | fait | Opus 5.5 élevé (rédigé ici par Fable 5.1) |
 | **1. Socle technique** | Dépôt GitHub, Vite, Capacitor Android, icône et splash, workflows APK debug et release signée, keystore | **Fait le 14/11/2026** : release v0.1.0 avec APK signé sur github.com/ThomasJousse/memo-ide-geronto | 2 à 3 h | Sonnet 5.5 moyen (fait par Fable 5.1) |
 | **2. Moteur** | Portage du moteur du Mémo (recherche, synonymes, fiches, chapitres, récents, mode sombre), pipeline Markdown→JSON, moteur d'échelles YAML, calculateurs, favoris, taille de texte, « mise à jour disponible » | **Fait le 14/11/2026 (v0.2.0)** : 3 types d'échelles (CAM, mini-GDS, GDS-15, MNA-SF, AGGIR vérifiée contre l'annexe officielle), 7 calculateurs, favoris, taille de texte, bandeau de mise à jour | 4 à 6 h | Sonnet 5.5 moyen (fait par Fable 5.1) |
-| **3. Contenu — lot A** | Ch. 1 Situations aiguës + Ch. 2 Syndromes gériatriques | 65 fiches, sources citées | 6 à 8 h | Opus 5.5 élevé |
-| **4. Contenu — lot B** | Ch. 4 Échelles (35 YAML + fiches) + Ch. 11 Calculateurs | Échelles interactives validées sur cas tests | 6 à 8 h | Opus 5.5 élevé |
-| **5. Contenu — lot C** | Ch. 3 Neurocognitif + Ch. 10 Communication | 37 fiches | 4 à 5 h | Opus 5.5 élevé |
-| **6. Contenu — lot D** | Ch. 5 Pharmaco + Ch. 6 Médicaments (90 molécules) | 115 fiches | 8 à 10 h | Opus 5.5 élevé (fiches molécules : Sonnet 5.5 sur gabarit, puis relecture Opus) |
-| **7. Contenu — lot E** | Ch. 7 Soins + Ch. 8 Biologie + Ch. 9 Parcours + Ch. 12 Repères | 93 fiches | 6 à 8 h | Opus 5.5 élevé |
-| **8. Relecture clinique** | Passe de cohérence inter-fiches, vérification des posologies et seuils contre HAS/SFGG/Vidal, liste des points à faire valider par Ophélie | Rapport de relecture + corrections | 4 à 6 h | Opus 5.5 élevé |
-| **9. Validation terrain** | Ophélie teste 2 semaines, remonte corrections (issues GitHub ou simple liste) | Liste de corrections | ton temps | Sonnet 5.5 moyen pour appliquer |
-| **10. Release 1.0** | Keystore de signature, workflow release, APK signé, guide d'installation, PWA | GitHub Release v1.0.0 + docs/INSTALLATION.md | 2 h | Sonnet 5.5 moyen |
-| **11. Vie de l'app** | Corrections, nouvelles fiches, annuaire, mises à jour des recos (ex. nouvelle reco HAS) | Releases v1.x | continu | Sonnet 5.5 moyen (Opus pour contenu clinique) |
+| **3. Contenu — lot A** | Ch. 1 Situations aiguës + Ch. 2 Syndromes gériatriques | **Fait le 14/11/2026** : 60 fiches | 6 à 8 h | Opus 5.5 élevé |
+| **4. Contenu — lot B** | Ch. 4 Échelles + Ch. 11 Calculateurs | **Fait** : 29 échelles interactives, 9 fiches d'évaluation, 12 calculateurs | 6 à 8 h | Opus 5.5 élevé |
+| **5. Contenu — lot C** | Ch. 3 Neurocognitif + Ch. 10 Communication | **Fait** : 27 fiches | 4 à 5 h | Opus 5.5 élevé |
+| **6. Contenu — lot D** | Ch. 5 Pharmaco + Ch. 6 Médicaments | **Fait** : 21 fiches + 91 fiches médicaments | 8 à 10 h | Opus 5.5 élevé |
+| **7. Contenu — lot E** | Ch. 7 Soins + Ch. 8 Biologie + Ch. 9 Parcours + Ch. 12 Repères | **Fait** : 53 fiches + annuaire local modifiable dans l'app | 6 à 8 h | Opus 5.5 élevé |
+| **8. Relecture clinique** | Cohérence inter-fiches, vérification des posologies et seuils, points à faire valider | **Fait** : docs/RELECTURE.md, docs/SOURCES.md | 4 à 6 h | Opus 5.5 élevé |
+| **9. Validation terrain** | Ophélie teste 2 semaines, remonte corrections | **Outils prêts** : lien « Signaler une erreur » sur chaque fiche, formulaires GitHub ; le test terrain reste à faire par Ophélie | ton temps | Sonnet 5.5 moyen pour appliquer |
+| **10. Release 1.0** | APK signé, guide d'installation, PWA | **Fait** : v1.0.0, version web hors ligne, docs/INSTALLATION.md | 2 h | Sonnet 5.5 moyen |
+| **11. Vie de l'app** | Corrections, nouvelles fiches, mises à jour des recos | **Outillé** : docs/MAINTENANCE.md, Dependabot ; continu | continu | Sonnet 5.5 moyen (Opus pour contenu clinique) |
 
 Total indicatif : **45 à 60 heures de sessions** réparties sur 3 à 5 semaines à raison d'une ou deux sessions par jour. Phases 3 à 7 sont indépendantes et peuvent tourner en parallèle dans des sessions séparées (chacune n'écrit que dans son dossier `content/`).
 

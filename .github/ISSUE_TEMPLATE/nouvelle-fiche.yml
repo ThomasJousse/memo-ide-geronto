@@ -1,0 +1,34 @@
+name: Nouvelle fiche ou nouvel outil
+description: Proposer une fiche, une échelle ou un calculateur qui manque.
+title: "[Nouvelle fiche] "
+labels: ["contenu", "nouveauté"]
+body:
+  - type: input
+    id: sujet
+    attributes:
+      label: Sujet
+      placeholder: "ex. Prise en charge du zona, échelle de Tinetti interactive…"
+    validations:
+      required: true
+  - type: dropdown
+    id: chapitre
+    attributes:
+      label: Chapitre
+      options:
+        - Situations aiguës
+        - Syndromes gériatriques
+        - Troubles neurocognitifs
+        - Échelles
+        - Pharmacologie
+        - Médicaments
+        - Soins et gestes
+        - Biologie
+        - Parcours et filière
+        - Relation et éthique
+        - Calculateurs
+        - Repères
+  - type: textarea
+    id: contenu
+    attributes:
+      label: Ce qui serait utile au quotidien
+      description: Situations où vous en auriez eu besoin, points clés, sources.

@@ -22,5 +22,15 @@ const splash = async (name) =>
     .png().toFile(out(name));
 await splash("splash.png");
 await splash("splash-dark.png");
+// Icônes de la version web (PWA)
+import { mkdirSync } from "node:fs";
+const pub = (name) => new URL(`../public/icons/${name}`, import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
+mkdirSync(new URL("../public/icons/", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"), { recursive: true });
+await sharp(svg).resize(192, 192).png().toFile(pub("icon-192.png"));
+await sharp(svg).resize(512, 512).png().toFile(pub("icon-512.png"));
+await sharp({ create: { width: 512, height: 512, channels: 4, background: BG } })
+  .composite([{ input: await sharp(fg).resize(340, 340).png().toBuffer(), gravity: "centre" }])
+  .png().toFile(pub("icon-maskable-512.png"));
+await sharp(svg).resize(180, 180).png().toFile(pub("apple-touch-icon.png"));
 writeFileSync(out(".generated"), "PNG générés par scripts/make-assets.mjs — ne pas éditer à la main\n");
 console.log("assets/ : icon-only, icon-foreground, icon-background, splash, splash-dark");

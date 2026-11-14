@@ -84,6 +84,8 @@ function itemHTML(e, toks) {
 const chips = (ids, style) => `<div class="sos" ${style ? `style="${style}"` : ""}>${ids.map((id) => `<a href="#e-${id}">${esc(byId[id].short || byId[id].title)}</a>`).join("")}</div>`;
 const backBar = (e) => `<div class="crumb"><button class="back" type="button" data-back>← Retour</button>${e ? pill(e.cat) : ""}${e ? `<button class="fav ${isFav(e.id) ? "on" : ""}" type="button" data-fav="${esc(e.id)}" aria-pressed="${isFav(e.id)}" title="Favori">${isFav(e.id) ? "★" : "☆"}</button>` : ""}</div>`;
 const DISCLAIMER = `<p class="foot">Aide-mémoire pour la prise en soin de la personne âgée. Il ne remplace ni la prescription médicale, ni les protocoles de l'établissement, ni le jugement clinique. Contenu rédigé avec l'aide d'une IA à partir des recommandations citées sur chaque fiche, en cours de validation par des professionnels de terrain : signalez toute erreur.</p>`;
+const REPO_URL = "https://github.com/ThomasJousse/memo-ide-geronto";
+const reportLink = (e) => e.kind === "annuaire" ? "" : `<p class="sources"><a href="${REPO_URL}/issues/new?template=correction.yml&title=${encodeURIComponent("[Correction] " + e.title)}&fiche=${encodeURIComponent(e.id)}" target="_blank" rel="noopener">Signaler une erreur sur cette fiche</a> (formulaire GitHub, sans donnée de patient)</p>`;
 const sourcesHTML = (e) => (e.sources ? `<p class="sources">Sources : ${esc(e.sources)}${e.updated ? ` · mis à jour ${esc(e.updated)}` : ""}</p>` : "");
 
 function renderHome() {
@@ -114,7 +116,7 @@ function renderEntry(id) {
     ${linkedScale ? `<a class="cta" href="#e-${linkedScale}">Ouvrir l'échelle interactive →</a>` : ""}
     <div class="tool"></div>${e.html ? `<div class="content">${e.html}</div>` : ""}
     ${linkedEntry ? `<a class="cta soft" href="#e-${linkedEntry}">Fiche explicative : ${esc(byId[linkedEntry].title)} →</a>` : ""}
-    ${sourcesHTML(e)}${DISCLAIMER}</article></div>`;
+    ${sourcesHTML(e)}${reportLink(e)}${DISCLAIMER}</article></div>`;
   const tool = app.querySelector(".tool");
   if (e.kind === "scale") renderScale(e.scale, tool, byId); else if (e.kind === "calc") renderCalc(e.calc, tool); else if (e.kind === "annuaire") renderAnnuaire(tool); else tool.remove();
   window.scrollTo(0, 0);
@@ -155,6 +157,11 @@ sizeBtn.addEventListener("click", () => { applySize(nextSize()); sizeBtn.setAttr
 window.addEventListener("hashchange", route);
 route();
 checkForUpdate(__APP_VERSION__, (u) => { pendingUpdate = u; showUpdate(u); });
+
+/* Version web : service worker pour le hors ligne (pas dans l'app Android, déjà hors ligne) */
+if (!Capacitor.isNativePlatform() && "serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+  window.addEventListener("load", () => { navigator.serviceWorker.register(`./sw.js?v=${encodeURIComponent(__APP_VERSION__)}`).catch(() => {}); });
+}
 
 /* Bouton retour Android */
 if (Capacitor.isNativePlatform()) {
