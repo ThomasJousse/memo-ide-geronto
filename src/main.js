@@ -83,7 +83,7 @@ function itemHTML(e, toks) {
 }
 const chips = (ids, style) => `<div class="sos" ${style ? `style="${style}"` : ""}>${ids.map((id) => `<a href="#e-${id}">${esc(byId[id].short || byId[id].title)}</a>`).join("")}</div>`;
 const backBar = (e) => `<div class="crumb"><button class="back" type="button" data-back>← Retour</button>${e ? pill(e.cat) : ""}${e ? `<button class="fav ${isFav(e.id) ? "on" : ""}" type="button" data-fav="${esc(e.id)}" aria-pressed="${isFav(e.id)}" title="Favori">${isFav(e.id) ? "★" : "☆"}</button>` : ""}</div>`;
-const DISCLAIMER = `<p class="foot">Aide-mémoire pour la prise en soin de la personne âgée. Il ne remplace ni la prescription médicale, ni les protocoles de l'établissement, ni le jugement clinique. Sources datées sur chaque fiche.</p>`;
+const DISCLAIMER = `<p class="foot">Aide-mémoire pour la prise en soin de la personne âgée. Il ne remplace ni la prescription médicale, ni les protocoles de l'établissement, ni le jugement clinique. Contenu rédigé avec l'aide d'une IA à partir des recommandations citées sur chaque fiche, en cours de validation par des professionnels de terrain : signalez toute erreur.</p>`;
 const sourcesHTML = (e) => (e.sources ? `<p class="sources">Sources : ${esc(e.sources)}${e.updated ? ` · mis à jour ${esc(e.updated)}` : ""}</p>` : "");
 
 function renderHome() {
