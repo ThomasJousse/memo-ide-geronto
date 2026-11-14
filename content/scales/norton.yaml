@@ -1,0 +1,28 @@
+id: norton
+title: "Échelle de Norton — risque d'escarre"
+short: "Norton"
+type: sum
+order: 61
+tags: "Norton, escarre, risque, condition physique, état mental, activité, mobilité, incontinence"
+resume: "5 items cotés de 1 à 4, score de 5 à 20. Score ≤ 14 = risque ; ≤ 12 = risque élevé."
+sources: "Norton D et al., 1962 ; HAS 2001 Prévention des escarres"
+items:
+  - id: physique
+    label: "Condition physique"
+    options: [{ label: "Bonne", points: 4 }, { label: "Moyenne", points: 3 }, { label: "Pauvre", points: 2 }, { label: "Très mauvaise", points: 1 }]
+  - id: mental
+    label: "État mental"
+    options: [{ label: "Bon (alerte)", points: 4 }, { label: "Apathique", points: 3 }, { label: "Confus", points: 2 }, { label: "Stuporeux", points: 1 }]
+  - id: activite
+    label: "Activité"
+    options: [{ label: "Ambulant", points: 4 }, { label: "Marche avec aide", points: 3 }, { label: "Assis au fauteuil", points: 2 }, { label: "Alité", points: 1 }]
+  - id: mobilite
+    label: "Mobilité"
+    options: [{ label: "Totale", points: 4 }, { label: "Diminuée", points: 3 }, { label: "Très limitée", points: 2 }, { label: "Immobile", points: 1 }]
+  - id: incontinence
+    label: "Incontinence"
+    options: [{ label: "Aucune", points: 4 }, { label: "Occasionnelle", points: 3 }, { label: "Urinaire", points: 2 }, { label: "Urinaire et fécale", points: 1 }]
+ranges:
+  - { min: 15, max: 20, text: "Risque faible.", level: ok }
+  - { min: 13, max: 14, text: "Risque : mesures de prévention.", level: warn, link: escarres }
+  - { min: 5, max: 12, text: "Risque élevé : prévention renforcée, support adapté.", level: crit, link: escarres }

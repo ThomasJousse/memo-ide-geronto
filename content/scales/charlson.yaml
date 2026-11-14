@@ -1,0 +1,41 @@
+id: charlson
+title: "Indice de comorbidité de Charlson (ajusté à l'âge)"
+short: "Charlson"
+type: sum
+order: 80
+tags: "Charlson, comorbidités, polypathologie, pronostic, mortalité, oncogériatrie"
+resume: "Somme pondérée des maladies chroniques et de l'âge. Plus le score est élevé, plus la mortalité à 10 ans est élevée."
+sources: "Charlson ME et al., J Chronic Dis 1987 ; Charlson ME et al., J Clin Epidemiol 1994 (ajustement à l'âge)"
+intro: "Cocher les maladies présentes (le niveau le plus grave seulement quand deux niveaux existent) et la tranche d'âge."
+items:
+  - id: age
+    label: "Âge"
+    options:
+      - { label: "< 50 ans", points: 0 }
+      - { label: "50 – 59 ans", points: 1 }
+      - { label: "60 – 69 ans", points: 2 }
+      - { label: "70 – 79 ans", points: 3 }
+      - { label: "≥ 80 ans", points: 4 }
+  - { id: idm, label: "Infarctus du myocarde", points: 1 }
+  - { id: ic, label: "Insuffisance cardiaque congestive", points: 1 }
+  - { id: aomi, label: "Artériopathie périphérique (ou anévrisme aortique ≥ 6 cm)", points: 1 }
+  - { id: avc, label: "AVC ou AIT (séquelles légères ou absentes)", points: 1 }
+  - { id: demence, label: "Démence", points: 1 }
+  - { id: bpco, label: "Maladie pulmonaire chronique", points: 1 }
+  - { id: connectivite, label: "Connectivite (lupus, polyarthrite rhumatoïde, polymyosite…)", points: 1 }
+  - { id: ulcere, label: "Ulcère gastroduodénal", points: 1 }
+  - { id: foie1, label: "Hépatopathie légère (hépatite chronique, cirrhose sans hypertension portale)", points: 1 }
+  - { id: diabete1, label: "Diabète sans complication", points: 1 }
+  - { id: hemiplegie, label: "Hémiplégie", points: 2 }
+  - { id: rein, label: "Insuffisance rénale modérée à sévère (créatinine > 265 µmol/L, dialyse, greffe)", points: 2 }
+  - { id: diabete2, label: "Diabète avec atteinte d'organe (rétinopathie, néphropathie, neuropathie)", points: 2 }
+  - { id: tumeur, label: "Tumeur solide non métastatique (dans les 5 ans)", points: 2 }
+  - { id: leucemie, label: "Leucémie", points: 2 }
+  - { id: lymphome, label: "Lymphome", points: 2 }
+  - { id: foie3, label: "Hépatopathie modérée à sévère (cirrhose avec hypertension portale)", points: 3 }
+  - { id: metastase, label: "Tumeur solide métastatique", points: 6 }
+  - { id: sida, label: "SIDA", points: 6 }
+ranges:
+  - { min: 0, max: 3, text: "Comorbidité faible à modérée pour l'âge.", level: ok }
+  - { min: 4, max: 5, text: "Comorbidité importante.", level: warn }
+  - { min: 6, max: 50, text: "Comorbidité sévère : pronostic à intégrer dans les décisions thérapeutiques (avec l'évaluation gériatrique, la fragilité et les souhaits du patient).", level: crit }

@@ -1,5 +1,4 @@
 # Raccourcis de l'écran d'accueil (ids de fiches, d'échelles « scale-… » ou de calculateurs « calc-… »).
-# Un id absent est ignoré à l'affichage mais signalé par npm run check.
 sos:
   - chute
   - confusion-aigue
@@ -8,17 +7,20 @@ sos:
   - fausse-route
   - avc
   - hypoglycemie
+  - agitation-aigue
   - acr-sujet-age
 quick:
   - scale-cam
+  - scale-4at
+  - scale-mmse
   - scale-mini-gds
-  - scale-gds-15
+  - scale-adl
+  - scale-iadl
   - scale-mna-sf
+  - scale-braden
+  - calc-tug
+  - scale-algoplus
   - scale-aggir
   - calc-cockcroft
   - calc-imc
-  - mmse
-  - adl-iadl
-  - braden
-  - tug
-  - algoplus
+  - egs

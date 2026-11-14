@@ -11,7 +11,19 @@ const KDIGO = (dfg) =>
   : dfg >= 15 ? ["G4 : sévèrement diminuée", "crit"]
   : ["G5 : insuffisance rénale terminale", "crit"];
 
-const creatToUmol = (v, unit) => (unit === "mgL" ? v * 8.84 : unit === "mgdL" ? v * 88.4 : v);
+// Facteur = mg de morphine orale par unité de dose quotidienne (ratios SFETD / AFSOS, indicatifs).
+const OPIOIDS = [
+  { id: "morphine-po", label: "Morphine orale", factor: 1, unit: "mg/24 h" },
+  { id: "morphine-sc", label: "Morphine SC", factor: 2, unit: "mg/24 h" },
+  { id: "morphine-iv", label: "Morphine IV", factor: 3, unit: "mg/24 h" },
+  { id: "oxycodone-po", label: "Oxycodone orale", factor: 2, unit: "mg/24 h" },
+  { id: "hydromorphone-po", label: "Hydromorphone orale", factor: 7.5, unit: "mg/24 h" },
+  { id: "fentanyl", label: "Fentanyl patch", factor: 2.4, unit: "µg/h" },
+  { id: "tramadol", label: "Tramadol oral", factor: 0.2, unit: "mg/24 h" },
+  { id: "codeine", label: "Codéine orale", factor: 1 / 6, unit: "mg/24 h" },
+];
+
+const creatToUmol =(v, unit) => (unit === "mgL" ? v * 8.84 : unit === "mgdL" ? v * 88.4 : v);
 
 export const CALCULATORS = [
   {
@@ -166,6 +178,110 @@ export const CALCULATORS = [
       const c = ca + 0.02 * (40 - alb);
       const level = c > 3 || c < 2 ? "crit" : c > 2.6 || c < 2.2 ? "warn" : "ok";
       return { num: Math.round(c * 100) / 100, unit: "mmol/L", level, text: c > 2.6 ? "<strong>Hypercalcémie</strong> : penser confusion, constipation, déshydratation, polyurie ; causes fréquentes : médicaments (vitamine D, calcium, thiazidiques), hyperparathyroïdie, cancer." : c < 2.2 ? "<strong>Hypocalcémie</strong> : vérifier vitamine D, magnésium, fonction rénale ; signes : crampes, paresthésies, QT long." : "Calcémie corrigée dans les valeurs usuelles." };
+    },
+  },
+  {
+    id: "tug",
+    title: "Timed Up and Go (TUG) et appui unipodal",
+    short: "TUG",
+    tags: "TUG, Timed Up and Go, chute, marche, équilibre, appui unipodal, risque de chute, mobilité",
+    resume: "Se lever d'un fauteuil à accoudoirs, marcher 3 m, faire demi-tour, revenir s'asseoir, à vitesse habituelle avec l'aide technique habituelle. ≥ 20 s = mobilité réduite, risque de chute élevé.",
+    sources: "Podsiadlo D, Richardson S, J Am Geriatr Soc 1991 ; HAS 2009 Chutes répétées ; Vellas BJ et al. 1997 (appui unipodal)",
+    fields: [
+      { id: "tug", label: "Durée du TUG", unit: "s", type: "number", min: 1, max: 300, step: 0.1 },
+      { id: "unipodal", label: "Appui unipodal (meilleur côté)", unit: "s", type: "number", min: 0, max: 60, step: 0.1, optional: true },
+    ],
+    compute: ({ tug, unipodal }) => {
+      const level = tug >= 20 ? "crit" : tug > 13.5 ? "warn" : "ok";
+      const sub = [];
+      let extra = "";
+      if (unipodal != null) { sub.push(`Appui unipodal ${unipodal} s`); if (unipodal < 5) extra = " Appui unipodal < 5 s : risque de chute traumatique augmenté."; }
+      const txt = tug >= 20 ? "<strong>Mobilité réduite, risque de chute élevé</strong> : évaluation des chutes, kinésithérapie, aides techniques." : tug > 13.5 ? "<strong>Risque de chute augmenté</strong> : programme d'équilibre et de renforcement." : "Mobilité satisfaisante.";
+      return { num: tug, unit: "s", level: extra && level === "ok" ? "warn" : level, sub, text: txt + extra + " Observer aussi la qualité : demi-tour décomposé, appui sur les accoudoirs, instabilité." };
+    },
+  },
+  {
+    id: "equianalgesie",
+    title: "Équianalgésie des opioïdes (rotation)",
+    short: "Équianalgésie",
+    tags: "équianalgésie, rotation des opioïdes, morphine, oxycodone, fentanyl, patch, hydromorphone, tramadol, codéine, conversion, équivalence",
+    resume: "Convertit une dose quotidienne d'opioïde en équivalent morphine orale, puis vers un autre opioïde. Réduire la nouvelle dose de 25 à 50 % (tolérance croisée incomplète), davantage chez l'âgé fragile.",
+    sources: "SFETD 2016 et AFSOS 2019 Rotation des opioïdes ; ANSM ; Mercadante S, Caraceni A, Palliat Med 2011",
+    fields: [
+      { id: "from", label: "Opioïde actuel", type: "select", options: OPIOIDS.map((o) => [o.id, o.label]) },
+      { id: "dose", label: "Dose par 24 h (µg/h pour un patch)", type: "number", min: 0, step: 0.1 },
+      { id: "to", label: "Vers", type: "select", options: OPIOIDS.map((o) => [o.id, o.label]) },
+    ],
+    compute: ({ from, dose, to }) => {
+      const a = OPIOIDS.find((o) => o.id === from), b = OPIOIDS.find((o) => o.id === to);
+      const eqm = dose * a.factor;
+      const target = eqm / b.factor;
+      const red = [Math.round(target * 0.5 * 10) / 10, Math.round(target * 0.75 * 10) / 10];
+      const sub = [`Équivalent morphine orale : ${Math.round(eqm)} mg/24 h`, `Équivalence brute : ${Math.round(target * 10) / 10} ${b.unit}`];
+      if (b.id === "tramadol" && target > 300) sub.push("Au-delà du maximum du tramadol chez l'âgé (300 mg/j)");
+      if (b.id === "fentanyl" && eqm < 30) sub.push("Patch le plus faible : 12 µg/h ≈ 30 mg de morphine orale");
+      return { num: `${red[0]} – ${red[1]}`, unit: `${b.unit} (dose réduite de 25 à 50 %)`, level: "warn", sub, text: `Ratios indicatifs : ${a.label} → morphine orale × ${a.factor}. <strong>Décision et prescription médicales.</strong> Prévoir des interdoses (environ 1/10 à 1/6 de la dose quotidienne), réévaluer douleur et vigilance à 24 – 48 h. Patch de fentanyl : délai d'action de 12 à 24 h, poursuivre l'ancien opioïde 12 h après la pose.` };
+    },
+  },
+  {
+    id: "deficit-eau",
+    title: "Déficit en eau (hypernatrémie)",
+    short: "Déficit en eau",
+    tags: "déficit hydrique, eau libre, hypernatrémie, déshydratation intracellulaire, eau totale, natrémie",
+    resume: "Déficit (L) = eau totale × (Na / 140 − 1). Eau totale chez l'âgé ≈ 45 % du poids chez la femme, 50 % chez l'homme. Corriger en 48 à 72 h, baisse de la natrémie ≤ 10 mmol/L par 24 h.",
+    sources: "Adrogué HJ, Madias NE, NEJM 2000 ; SFGG",
+    fields: [
+      { id: "na", label: "Natrémie", unit: "mmol/L", type: "number", min: 120, max: 200, step: 0.1 },
+      { id: "poids", label: "Poids", unit: "kg", type: "number", min: 20, max: 250, step: 0.1 },
+      { id: "sexe", label: "Sexe", type: "select", options: [["F", "Femme"], ["H", "Homme"]] },
+    ],
+    compute: ({ na, poids, sexe }) => {
+      if (na <= 145) return { num: 0, unit: "L", level: "ok", text: "Pas d'hypernatrémie : pas de déficit en eau libre calculable." };
+      const act = poids * (sexe === "F" ? 0.45 : 0.5);
+      const def = act * (na / 140 - 1);
+      return { num: r1(def), unit: "L", level: na >= 155 ? "crit" : "warn", sub: [`Eau totale estimée ${r1(act)} L`], text: "À ajouter aux besoins de base (≈ 30 mL/kg/j) et aux pertes en cours (fièvre, diarrhée). Apport d'eau libre (boissons, eau gélifiée, glucosé 5 % SC ou IV) <strong>sur prescription</strong>, sur 48 à 72 h, natrémie de contrôle à 6 – 12 h." };
+    },
+  },
+  {
+    id: "besoins",
+    title: "Besoins nutritionnels et hydriques",
+    short: "Besoins",
+    tags: "besoins nutritionnels, calories, kcal, protéines, eau, hydratation, dénutrition, apports, CNO",
+    resume: "Personne âgée : 30 kcal/kg/j (30 à 40 si dénutrition ou agression), protéines 1 à 1,2 g/kg/j (1,2 à 1,5 si dénutrition), eau ≈ 30 mL/kg/j.",
+    sources: "HAS 2021 Dénutrition ≥ 70 ans ; ESPEN 2022 Geriatrics",
+    fields: [
+      { id: "poids", label: "Poids", unit: "kg", type: "number", min: 20, max: 250, step: 0.1 },
+      { id: "etat", label: "Situation", type: "select", options: [["n", "Pas de dénutrition"], ["d", "Dénutrition ou maladie aiguë"]] },
+      { id: "fievre", label: "Température", unit: "°C", type: "number", min: 34, max: 42, step: 0.1, optional: true },
+    ],
+    compute: ({ poids, etat, fievre }) => {
+      const d = etat === "d";
+      const kcal = d ? [30 * poids, 40 * poids] : [30 * poids, 30 * poids];
+      const prot = d ? [1.2 * poids, 1.5 * poids] : [1 * poids, 1.2 * poids];
+      let eau = 30 * poids;
+      if (fievre && fievre > 37) eau += Math.round((fievre - 37) * 400);
+      return { num: kcal[0] === kcal[1] ? r0(kcal[0]) : `${r0(kcal[0])} – ${r0(kcal[1])}`, unit: "kcal/j", level: "ok", sub: [`Protéines ${r0(prot[0])} – ${r0(prot[1])} g/j`, `Eau ≈ ${r0(eau / 50) * 50} mL/j (boissons + aliments)`], text: "Un complément nutritionnel oral standard apporte environ 300 kcal et 20 g de protéines (vérifier le produit). Répartir les protéines sur les repas, collations enrichies." };
+    },
+  },
+  {
+    id: "osmolarite",
+    title: "Osmolarité plasmatique calculée",
+    short: "Osmolarité",
+    tags: "osmolarité, osmolalité, hyperosmolaire, natrémie, glycémie, urée, déshydratation, coma hyperosmolaire",
+    resume: "Osmolarité efficace = 2 × Na + glycémie (mmol/L). Normale 285 à 295 mOsm/L ; > 320 dans le syndrome d'hyperglycémie hyperosmolaire.",
+    sources: "ADA Hyperglycemic crises 2024 ; formules classiques de biochimie",
+    fields: [
+      { id: "na", label: "Natrémie", unit: "mmol/L", type: "number", min: 100, max: 200, step: 0.1 },
+      { id: "gly", label: "Glycémie", unit: "g/L", type: "number", min: 0.2, max: 20, step: 0.01 },
+      { id: "uree", label: "Urée", unit: "mmol/L", type: "number", min: 0, max: 100, step: 0.1, optional: true },
+    ],
+    compute: ({ na, gly, uree }) => {
+      const g = gly * 5.55;
+      const eff = 2 * na + g;
+      const sub = [`Glycémie ${r1(g)} mmol/L`];
+      if (uree != null) sub.push(`Osmolarité totale ${r0(eff + uree)} mOsm/L`);
+      const level = eff > 320 ? "crit" : eff > 295 || eff < 275 ? "warn" : "ok";
+      return { num: r0(eff), unit: "mOsm/L (efficace)", level, sub, text: eff > 320 ? "<strong>Hyperosmolarité majeure</strong> : risque de coma hyperosmolaire, avis médical urgent." : eff > 295 ? "Hyperosmolarité : déshydratation intracellulaire, hydrater selon prescription." : eff < 275 ? "Hypo-osmolarité (hyponatrémie vraie probable)." : "Osmolarité normale." };
     },
   },
 ];

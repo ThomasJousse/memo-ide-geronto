@@ -1,0 +1,42 @@
+id: sppb
+title: "SPPB — Short Physical Performance Battery"
+short: "SPPB"
+type: sum
+order: 31
+tags: "SPPB, performance physique, équilibre, vitesse de marche, lever de chaise, fragilité, sarcopénie, chute"
+resume: "3 épreuves (équilibre, marche sur 4 m, 5 levers de chaise). Score sur 12 : ≤ 9 = limitation, ≤ 8 = sarcopénie sévère si force diminuée."
+sources: "Guralnik JM et al., J Gerontol 1994 ; EWGSOP2 2019"
+intro: "Équilibre : pieds joints, puis semi-tandem, puis tandem, 10 secondes chacun ; arrêter à la première épreuve échouée. Marche : 4 mètres à vitesse habituelle, meilleur de 2 essais. Lever de chaise : 5 fois le plus vite possible, bras croisés sur la poitrine."
+items:
+  - id: joints
+    label: "Équilibre pieds joints, 10 s"
+    options: [{ label: "Tenu 10 s", points: 1 }, { label: "Non tenu", points: 0 }]
+  - id: semitandem
+    label: "Équilibre semi-tandem, 10 s"
+    options: [{ label: "Tenu 10 s", points: 1 }, { label: "Non tenu ou non réalisé", points: 0 }]
+  - id: tandem
+    label: "Équilibre tandem (pieds l'un devant l'autre)"
+    options:
+      - { label: "Tenu 10 s", points: 2 }
+      - { label: "Tenu 3 à 9,99 s", points: 1 }
+      - { label: "Moins de 3 s ou non réalisé", points: 0 }
+  - id: marche
+    label: "Vitesse de marche sur 4 m"
+    options:
+      - { label: "< 4,82 s", points: 4 }
+      - { label: "4,82 à 6,20 s", points: 3 }
+      - { label: "6,21 à 8,70 s", points: 2 }
+      - { label: "> 8,70 s", points: 1 }
+      - { label: "Impossible", points: 0 }
+  - id: chaise
+    label: "5 levers de chaise"
+    options:
+      - { label: "≤ 11,19 s", points: 4 }
+      - { label: "11,20 à 13,69 s", points: 3 }
+      - { label: "13,70 à 16,69 s", points: 2 }
+      - { label: "16,70 à 60 s", points: 1 }
+      - { label: "> 60 s ou impossible", points: 0 }
+ranges:
+  - { min: 10, max: 12, text: "Bonne performance physique.", level: ok }
+  - { min: 7, max: 9, text: "Limitation modérée : risque de chute et de perte d'autonomie, activité physique adaptée.", level: warn, link: chutes-repetees }
+  - { min: 0, max: 6, text: "Limitation sévère : évaluation gériatrique, kinésithérapie, prévention des chutes.", level: crit, link: chutes-repetees }

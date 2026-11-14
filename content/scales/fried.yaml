@@ -1,0 +1,19 @@
+id: fried
+title: "Phénotype de fragilité de Fried"
+short: "Fried"
+type: sum
+order: 40
+tags: "fragilité, Fried, phénotype, vitesse de marche, force de préhension, épuisement, perte de poids, sédentarité"
+resume: "5 critères. 0 = robuste, 1 à 2 = pré-fragile, 3 et plus = fragile."
+sources: "Fried LP et al., J Gerontol 2001 ; HAS 2013 Repérage de la fragilité"
+intro: "Cocher chaque critère présent."
+items:
+  - { id: poids, label: "Perte de poids involontaire ≥ 4,5 kg (ou ≥ 5 %) en un an" }
+  - { id: epuisement, label: "Épuisement ressenti", help: "Se sent fatigué(e), « tout est un effort », au moins 3 jours par semaine." }
+  - { id: activite, label: "Activité physique faible", help: "Sédentarité, ne marche presque plus, pas d'activité de loisir physique." }
+  - { id: marche, label: "Vitesse de marche lente", help: "Plus de 5 secondes pour parcourir 4 mètres (< 0,8 m/s)." }
+  - { id: force, label: "Force de préhension diminuée", help: "Dynamomètre : < 27 kg chez l'homme, < 16 kg chez la femme (seuils EWGSOP2)." }
+ranges:
+  - { min: 0, max: 0, text: "Robuste.", level: ok }
+  - { min: 1, max: 2, text: "Pré-fragile : agir sur l'activité physique, la nutrition, les médicaments.", level: warn, link: fragilite }
+  - { min: 3, max: 5, text: "Fragile : évaluation gériatrique standardisée et plan personnalisé de prévention.", level: crit, link: fragilite }

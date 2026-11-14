@@ -1,0 +1,16 @@
+id: cinq-mots
+title: "Épreuve des 5 mots de Dubois"
+short: "5 mots"
+type: sum
+order: 6
+tags: "5 mots, Dubois, mémoire, rappel libre, rappel indicé, Alzheimer, dépistage, hippocampe"
+resume: "Apprentissage de 5 mots avec indices sémantiques. Score total sur 10 (rappel immédiat + différé, libre et indicé). Score < 10 : trouble de mémoire à explorer."
+sources: "Dubois B et al., Presse Méd 2002 ; HAS 2011 Diagnostic de la maladie d'Alzheimer"
+intro: "Présenter la liste (ex. : musée, limonade, sauterelle, passoire, camion), faire lire, puis demander « Quel est le nom du fruit, de la boisson… ? ». Rappel immédiat (libre puis indicé avec la catégorie), tâche distractive, puis rappel différé. Compter pour chaque phase les mots retrouvés, librement ou grâce à l'indice."
+items:
+  - { id: immediat, label: "Rappel immédiat : mots retrouvés (libre + indicé)", range: [0, 5] }
+  - { id: differe, label: "Rappel différé : mots retrouvés (libre + indicé)", range: [0, 5] }
+ranges:
+  - { min: 10, max: 10, text: "Normal.", level: ok }
+  - { min: 0, max: 9, text: "Score < 10 : trouble de la mémoire possible, particulièrement évocateur s'il n'est pas corrigé par l'indiçage. Avis médical, consultation mémoire.", level: warn }
+after: "Un rappel libre faible mais normalisé par l'indice évoque un trouble attentionnel (dépression, anxiété) ; un rappel peu amélioré par l'indice évoque une atteinte hippocampique (maladie d'Alzheimer)."

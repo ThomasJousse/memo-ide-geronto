@@ -1,0 +1,28 @@
+id: doloplus
+title: "Doloplus-2 — douleur chronique chez la personne âgée non communicante"
+short: "Doloplus"
+type: sum
+order: 51
+tags: "Doloplus, douleur chronique, hétéro-évaluation, démence, non communicant, retentissement somatique, psychomoteur, psychosocial"
+resume: "10 items cotés de 0 à 3, en équipe, en comparant au comportement habituel. Score ≥ 5/30 = douleur."
+sources: "Collectif Doloplus (Wary B et al.), 1999 ; www.doloplus.fr"
+intro: "Coter en équipe pluridisciplinaire, en se référant aux descripteurs de la grille officielle pour chaque item (0 = absent ou comportement habituel, 3 = altération majeure). Un item non pertinent est coté 0."
+options:
+  - { label: "0", points: 0 }
+  - { label: "1", points: 1 }
+  - { label: "2", points: 2 }
+  - { label: "3", points: 3 }
+items:
+  - { id: plaintes, label: "1. Plaintes somatiques" }
+  - { id: positions, label: "2. Positions antalgiques au repos" }
+  - { id: protection, label: "3. Protection de zones douloureuses" }
+  - { id: mimique, label: "4. Mimique" }
+  - { id: sommeil, label: "5. Sommeil" }
+  - { id: toilette, label: "6. Toilette et habillage" }
+  - { id: mouvements, label: "7. Mouvements" }
+  - { id: communication, label: "8. Communication" }
+  - { id: social, label: "9. Vie sociale" }
+  - { id: comportement, label: "10. Troubles du comportement" }
+ranges:
+  - { min: 0, max: 4, text: "Pas de douleur objectivée (réévaluer régulièrement).", level: ok }
+  - { min: 5, max: 30, text: "Douleur : traitement antalgique et réévaluation.", level: crit, link: douleur-chronique }

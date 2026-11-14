@@ -1,0 +1,18 @@
+id: algoplus
+title: "Algoplus — douleur aiguë chez la personne âgée non communicante"
+short: "Algoplus"
+type: sum
+order: 50
+tags: "Algoplus, douleur aiguë, hétéro-évaluation, non communicant, démence, visage, regard, plaintes, comportement"
+resume: "5 domaines observés en 1 minute. Score ≥ 2 = douleur probable : traiter et réévaluer."
+sources: "Rat P et al., Eur J Pain 2011 ; Collectif Doloplus ; SFETD"
+intro: "Observer la personne pendant 1 minute, idéalement lors d'une mobilisation. Cocher un domaine dès qu'un des comportements est présent."
+items:
+  - { id: visage, label: "Visage", help: "Froncement des sourcils, grimaces, crispation, mâchoires serrées, visage figé." }
+  - { id: regard, label: "Regard", help: "Regard inattentif, fixe, lointain ou suppliant, pleurs, yeux fermés." }
+  - { id: plaintes, label: "Plaintes", help: "« Aïe », « Ça fait mal », gémissements, cris." }
+  - { id: corps, label: "Corps", help: "Retrait ou protection d'une zone, refus de mobilisation, attitude figée." }
+  - { id: comportement, label: "Comportements", help: "Agitation ou agressivité, agrippement." }
+ranges:
+  - { min: 0, max: 1, text: "Douleur peu probable à cet instant (réévaluer si le doute persiste).", level: ok }
+  - { min: 2, max: 5, text: "Douleur probable : antalgique selon prescription, réévaluer après traitement (objectif < 2).", level: crit, link: douleur-chronique }

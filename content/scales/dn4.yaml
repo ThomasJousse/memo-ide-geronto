@@ -1,0 +1,23 @@
+id: dn4
+title: "DN4 — douleur neuropathique"
+short: "DN4"
+type: sum
+order: 52
+tags: "DN4, douleur neuropathique, brûlure, décharge électrique, fourmillements, allodynie, zona, diabète, neuropathie"
+resume: "7 items à l'interrogatoire + 3 à l'examen. Score ≥ 4/10 = douleur neuropathique probable."
+sources: "Bouhassira D et al., Pain 2005 ; SFETD 2020"
+intro: "Cocher chaque réponse « oui »."
+items:
+  - { id: brulure, label: "La douleur présente une caractéristique de brûlure" }
+  - { id: froid, label: "La douleur présente une sensation de froid douloureux" }
+  - { id: decharges, label: "La douleur présente des décharges électriques" }
+  - { id: fourmillements, label: "Dans la même zone : fourmillements" }
+  - { id: picotements, label: "Dans la même zone : picotements" }
+  - { id: engourdissement, label: "Dans la même zone : engourdissement" }
+  - { id: demangeaisons, label: "Dans la même zone : démangeaisons" }
+  - { id: hypotact, label: "Examen : hypoesthésie au tact" }
+  - { id: hypopiqure, label: "Examen : hypoesthésie à la piqûre" }
+  - { id: frottement, label: "Examen : douleur provoquée ou augmentée par le frottement" }
+ranges:
+  - { min: 0, max: 3, text: "Douleur neuropathique peu probable.", level: ok }
+  - { min: 4, max: 10, text: "Douleur neuropathique probable : avis médical (gabapentinoïde à faible dose, emplâtre de lidocaïne, antidépresseur selon le cas).", level: warn, link: douleur-chronique }

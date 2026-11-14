@@ -168,6 +168,11 @@ html[data-size="XL"] body { font-size: 20px; }
 .sitem em, .opts em { font-style: normal; font-family: var(--f-mono); font-size: .8rem; color: var(--muted); margin-left: auto; padding-left: 8px; }
 .opts { display: grid; gap: 4px; clear: both; }
 .opts.row { grid-template-columns: 1fr 1fr; }
+.opts.nums { grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); }
+.opts.nums label { justify-content: center; padding: 7px 4px; }
+.opts.nums input { position: absolute; opacity: 0; }
+.opts.nums label { position: relative; font-family: var(--f-mono); font-weight: 600; }
+.scale-after { font-size: .92rem; }
 .opts label { display: flex; align-items: center; gap: 8px; padding: 7px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); cursor: pointer; font-size: .95rem; }
 .opts label:has(input:checked) { border-color: var(--cc, var(--accent)); background: color-mix(in srgb, var(--cc, var(--accent)) 10%, var(--surface)); }
 .opts input { width: 16px; height: 16px; flex: none; margin: 0; }

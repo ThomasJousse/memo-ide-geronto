@@ -1,0 +1,17 @@
+id: iadl
+title: "IADL de Lawton simplifiée (4 items)"
+short: "IADL"
+type: sum
+order: 21
+tags: "IADL, Lawton, activités instrumentales, téléphone, transports, médicaments, budget, autonomie, troubles cognitifs"
+resume: "4 activités instrumentales : téléphone, transports, médicaments, budget. Toute perte d'autonomie à l'une d'elles est associée à un risque de troubles cognitifs."
+sources: "Lawton MP, Brody EM, Gerontologist 1969 ; Barberger-Gateau P et al., J Am Geriatr Soc 1992 (4 IADL, cohorte PAQUID)"
+intro: "Cocher les activités que la personne réalise seule, sans aide ni surveillance."
+items:
+  - { id: tel, label: "Utilise le téléphone de sa propre initiative (compose les numéros)" }
+  - { id: transports, label: "Utilise les transports (en commun, taxi, voiture) seule" }
+  - { id: medicaments, label: "Prend ses médicaments seule, à la bonne dose et à la bonne heure" }
+  - { id: budget, label: "Gère son budget seule (factures, chèques, banque)" }
+ranges:
+  - { min: 4, max: 4, text: "Autonome pour les 4 activités instrumentales.", level: ok }
+  - { min: 0, max: 3, text: "Perte d'autonomie instrumentale : rechercher un trouble cognitif (MMSE, consultation mémoire) si elle n'est pas expliquée par un handicap physique.", level: warn }

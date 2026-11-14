@@ -96,7 +96,8 @@ for (const file of walk(join(CONTENT, "scales"), ".yaml")) {
     } else if (s.type === "sum") {
       let max = 0;
       for (const i of s.items) {
-        if (i.options) { if (!Array.isArray(i.options) || i.options.some((o) => typeof o.points !== "number" || !o.label)) problems.push(`${rel} : options invalides pour « ${i.id} »`); else max += Math.max(...i.options.map((o) => o.points)); }
+        const opts = i.options || (i.range ? Array.from({ length: Math.floor((i.range[1] - i.range[0]) / (i.step || 1)) + 1 }, (_, k) => ({ label: String(i.range[0] + k * (i.step || 1)), points: i.range[0] + k * (i.step || 1) })) : (!i.scores && i.points == null && s.options ? s.options : null));
+        if (opts) { if (!Array.isArray(opts) || opts.some((o) => typeof o.points !== "number" || !o.label)) problems.push(`${rel} : options invalides pour « ${i.id} »`); else max += Math.max(...opts.map((o) => o.points)); }
         else if (i.scores) { if (!["oui", "non"].includes(i.scores)) problems.push(`${rel} : scores doit valoir oui ou non (« ${i.id} »)`); max += 1; }
         else max += Number(i.points ?? 1);
       }

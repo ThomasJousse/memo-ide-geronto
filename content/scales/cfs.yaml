@@ -1,0 +1,28 @@
+id: cfs
+title: "Échelle de fragilité clinique (CFS, Rockwood)"
+short: "CFS"
+type: sum
+order: 41
+tags: "fragilité, CFS, Rockwood, Clinical Frailty Scale, pronostic, niveau de soins"
+resume: "Score de 1 (très en forme) à 9 (phase terminale), à coter sur l'état des 2 semaines précédant la maladie aiguë."
+sources: "Rockwood K et al., CMAJ 2005 ; CFS version 2.0 (Dalhousie University, 2020), traduction française"
+intro: "Choisir la description qui correspond le mieux à l'état habituel de la personne, avant l'épisode aigu."
+items:
+  - id: cfs
+    label: "Niveau"
+    options:
+      - { label: "1 — Très en forme : robuste, actif, énergique, exercice régulier", points: 1 }
+      - { label: "2 — En forme : pas de maladie active, actif occasionnellement", points: 2 }
+      - { label: "3 — Gère bien : problèmes de santé contrôlés, peu actif en dehors de la marche", points: 3 }
+      - { label: "4 — Très légère fragilité : autonome, mais ralenti ou fatigué dans la journée", points: 4 }
+      - { label: "5 — Légèrement fragile : aide pour les activités instrumentales (courses, transports, ménage, budget)", points: 5 }
+      - { label: "6 — Modérément fragile : aide pour les activités extérieures et une partie de la toilette ou des escaliers", points: 6 }
+      - { label: "7 — Sévèrement fragile : dépendant pour les soins personnels, état stable", points: 7 }
+      - { label: "8 — Très sévèrement fragile : totalement dépendant, approche de la fin de vie", points: 8 }
+      - { label: "9 — Phase terminale : espérance de vie inférieure à 6 mois", points: 9 }
+ranges:
+  - { min: 1, max: 3, text: "Non fragile.", level: ok }
+  - { min: 4, max: 4, text: "Vulnérable : surveiller, prévention.", level: warn }
+  - { min: 5, max: 6, text: "Fragilité légère à modérée : évaluation gériatrique, plan d'aide.", level: warn, link: fragilite }
+  - { min: 7, max: 9, text: "Fragilité sévère : discuter le niveau de soins et le projet de soins avec la personne et ses proches.", level: crit }
+after: "Dans la démence, le score dépend du degré de dépendance : démence légère ≈ 5, modérée ≈ 6, sévère ≈ 7."

@@ -1,0 +1,38 @@
+id: audit-c
+title: "AUDIT-C — repérage de la consommation d'alcool"
+short: "AUDIT-C"
+type: sum
+order: 90
+tags: "AUDIT-C, alcool, consommation à risque, repérage, mésusage, sevrage"
+resume: "3 questions. Score ≥ 3 chez la femme, ≥ 4 chez l'homme : consommation à risque. Chez l'âgé, des seuils plus bas sont souvent retenus."
+sources: "Bush K et al., Arch Intern Med 1998 ; HAS 2021 Repérage précoce et intervention brève ; SFA"
+items:
+  - id: freq
+    label: "À quelle fréquence buvez-vous de l'alcool ?"
+    options:
+      - { label: "Jamais", points: 0 }
+      - { label: "Une fois par mois ou moins", points: 1 }
+      - { label: "2 à 4 fois par mois", points: 2 }
+      - { label: "2 à 3 fois par semaine", points: 3 }
+      - { label: "4 fois ou plus par semaine", points: 4 }
+  - id: verres
+    label: "Combien de verres standard buvez-vous un jour où vous buvez ?"
+    options:
+      - { label: "1 ou 2", points: 0 }
+      - { label: "3 ou 4", points: 1 }
+      - { label: "5 ou 6", points: 2 }
+      - { label: "7 à 9", points: 3 }
+      - { label: "10 ou plus", points: 4 }
+  - id: six
+    label: "À quelle fréquence buvez-vous six verres ou plus en une occasion ?"
+    options:
+      - { label: "Jamais", points: 0 }
+      - { label: "Moins d'une fois par mois", points: 1 }
+      - { label: "Une fois par mois", points: 2 }
+      - { label: "Une fois par semaine", points: 3 }
+      - { label: "Tous les jours ou presque", points: 4 }
+ranges:
+  - { min: 0, max: 2, text: "Consommation à faible risque.", level: ok }
+  - { min: 3, max: 3, text: "Consommation à risque chez la femme (et souvent chez l'âgé) : intervention brève.", level: warn }
+  - { min: 4, max: 12, text: "Consommation à risque : intervention brève, évaluer la dépendance, interactions médicamenteuses, risque de sevrage à l'hospitalisation.", level: crit }
+after: "Verre standard = 10 g d'alcool (25 cl de bière à 5°, 10 cl de vin à 12°, 3 cl d'alcool fort). Chez l'âgé : chutes, confusion, interactions avec psychotropes, anticoagulants et antidiabétiques."

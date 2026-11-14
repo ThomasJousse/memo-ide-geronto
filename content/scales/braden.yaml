@@ -1,0 +1,56 @@
+id: braden
+title: "Échelle de Braden — risque d'escarre"
+short: "Braden"
+type: sum
+order: 60
+tags: "Braden, escarre, risque, prévention, perception sensorielle, humidité, activité, mobilité, nutrition, friction, cisaillement"
+resume: "6 items, score de 6 à 23. Plus le score est bas, plus le risque est élevé : ≤ 18 = risque chez la personne âgée."
+sources: "Bergstrom N, Braden B et al., Nurs Res 1987 ; HAS 2001 ; NPIAP/EPUAP 2019"
+items:
+  - id: perception
+    label: "Perception sensorielle (réaction à l'inconfort)"
+    options:
+      - { label: "Complètement limitée", points: 1 }
+      - { label: "Très limitée", points: 2 }
+      - { label: "Légèrement limitée", points: 3 }
+      - { label: "Aucune atteinte", points: 4 }
+  - id: humidite
+    label: "Humidité de la peau"
+    options:
+      - { label: "Constamment humide", points: 1 }
+      - { label: "Très humide (draps changés au moins une fois par poste)", points: 2 }
+      - { label: "Occasionnellement humide", points: 3 }
+      - { label: "Rarement humide", points: 4 }
+  - id: activite
+    label: "Activité"
+    options:
+      - { label: "Alité", points: 1 }
+      - { label: "Confiné au fauteuil", points: 2 }
+      - { label: "Marche occasionnellement", points: 3 }
+      - { label: "Marche fréquemment", points: 4 }
+  - id: mobilite
+    label: "Mobilité (changer de position)"
+    options:
+      - { label: "Complètement immobile", points: 1 }
+      - { label: "Très limitée", points: 2 }
+      - { label: "Légèrement limitée", points: 3 }
+      - { label: "Aucune limitation", points: 4 }
+  - id: nutrition
+    label: "Nutrition"
+    options:
+      - { label: "Très pauvre (mange rarement plus d'un tiers du repas)", points: 1 }
+      - { label: "Probablement inadéquate", points: 2 }
+      - { label: "Adéquate", points: 3 }
+      - { label: "Excellente", points: 4 }
+  - id: friction
+    label: "Friction et cisaillement"
+    options:
+      - { label: "Problème (glisse dans le lit ou le fauteuil, aide totale pour se repositionner)", points: 1 }
+      - { label: "Problème potentiel", points: 2 }
+      - { label: "Pas de problème apparent", points: 3 }
+ranges:
+  - { min: 19, max: 23, text: "Risque faible.", level: ok }
+  - { min: 15, max: 18, text: "Risque : mesures de prévention (positionnement, support, nutrition).", level: warn, link: escarres }
+  - { min: 13, max: 14, text: "Risque modéré : prévention renforcée, support adapté.", level: warn, link: escarres }
+  - { min: 10, max: 12, text: "Risque élevé : support dynamique, changements de position programmés.", level: crit, link: escarres }
+  - { min: 6, max: 9, text: "Risque très élevé.", level: crit, link: escarres }

@@ -33,26 +33,36 @@ function renderCriteria(s, box, byId) {
 }
 
 /* ---------- sum ---------- */
+// Options d'un item : propres à l'item, ou plage numérique (range: [0, 10]), ou options communes de l'échelle.
+export function itemOptions(i, s) {
+  if (i.options) return i.options;
+  if (i.range) { const out = []; for (let p = i.range[0]; p <= i.range[1]; p += i.step || 1) out.push({ label: String(p), points: p }); return out; }
+  if (!i.scores && i.points == null && s.options) return s.options;
+  return null;
+}
 export function sumMax(s) {
-  return s.items.reduce((t, i) => t + (i.options ? Math.max(...i.options.map((o) => Number(o.points) || 0)) : i.scores ? 1 : Number(i.points ?? 1)), 0);
+  return s.items.reduce((t, i) => { const o = itemOptions(i, s); return t + (o ? Math.max(...o.map((x) => Number(x.points) || 0)) : i.scores ? 1 : Number(i.points ?? 1)); }, 0);
 }
 function renderSum(s, box, byId) {
+  for (const i of s.items) { const o = itemOptions(i, s); if (o) i._opts = o; }
   const max = sumMax(s);
   box.innerHTML = `${s.intro ? `<p class="calc-ex">${esc(s.intro)}</p>` : ""}<div class="items">${s.items.map((i, n) => {
-    if (i.options) return `<fieldset class="sitem"><legend>${esc(i.label)}</legend><div class="opts">${i.options.map((o, k) => `<label><input type="radio" name="${esc(i.id)}" value="${k}" data-points="${Number(o.points) || 0}"><span>${esc(o.label)}</span><em>${Number(o.points) || 0}</em></label>`).join("")}</div></fieldset>`;
+    if (i._opts) { const numeric = !!i.range; return `<fieldset class="sitem"><legend>${esc(i.label)}</legend>${i.help ? `<p class="help">${esc(i.help)}</p>` : ""}<div class="opts${numeric ? " nums" : ""}">${i._opts.map((o, k) => `<label><input type="radio" name="${esc(i.id)}" value="${k}" data-points="${Number(o.points) || 0}"><span>${esc(o.label)}</span>${numeric ? "" : `<em>${Number(o.points) || 0}</em>`}</label>`).join("")}</div></fieldset>`; }
     if (i.scores) { const oui = i.scores === "oui" ? 1 : 0; return `<fieldset class="sitem yn"><legend><span class="n">${n + 1}.</span> ${esc(i.label)}</legend><div class="opts row"><label><input type="radio" name="${esc(i.id)}" value="oui" data-points="${oui}"><span>Oui</span></label><label><input type="radio" name="${esc(i.id)}" value="non" data-points="${1 - oui}"><span>Non</span></label></div></fieldset>`; }
-    return `<label class="sitem chk"><input type="checkbox" name="${esc(i.id)}" data-points="${Number(i.points ?? 1)}"><span>${esc(i.label)}</span><em>${Number(i.points ?? 1)}</em></label>`;
+    return `<label class="sitem chk"><input type="checkbox" name="${esc(i.id)}" data-points="${Number(i.points ?? 1)}"><span>${esc(i.label)}${i.help ? `<br><small>${esc(i.help)}</small>` : ""}</span><em>${Number(i.points ?? 1)}</em></label>`;
   }).join("")}</div><div class="res"></div>`;
   const update = () => {
     let total = 0, answered = 0;
     for (const i of s.items) {
       const sel = box.querySelector(`[name="${i.id}"]:checked`);
-      if (i.options || i.scores) { if (sel) { answered++; total += Number(sel.dataset.points); } }
+      if (i._opts || i.scores) { if (sel) { answered++; total += Number(sel.dataset.points); } }
       else { answered++; if (sel) total += Number(sel.dataset.points); }
     }
     const complete = answered === s.items.length;
-    const range = (s.ranges || []).find((r) => (r.min == null || total >= r.min) && (r.max == null || total <= r.max));
+    const t2 = Math.round(total * 100) / 100;
+    const range = (s.ranges || []).find((r) => (r.min == null || t2 >= r.min) && (r.max == null || t2 <= r.max));
     const link = range && range.link && byId[range.link] ? range.link : null;
+    total = Math.round(total * 100) / 100;
     box.querySelector(".res").innerHTML = resultHTML({ num: total, max, level: complete ? range && range.level : "", text: range ? `<strong>${esc(range.text)}</strong>` : "", link, linkLabel: link ? byId[link].title : null, provisional: complete ? null : `${answered} / ${s.items.length} items renseignés` });
   };
   box.addEventListener("change", update);
@@ -96,5 +106,6 @@ export function renderScale(s, box, byId) {
   else if (s.type === "sum") renderSum(s, box, byId);
   else if (s.type === "grid") renderGrid(s, box);
   else box.innerHTML = `<div class="empty">Type d'échelle inconnu : ${esc(s.type)}</div>`;
+  if (s.after) box.insertAdjacentHTML("beforeend", `<div class="callout tip scale-after"><span class="callout-label">Repère</span><p>${esc(s.after)}</p></div>`);
 }
-export const scaleSearchText = (s) => [s.intro, ...(s.items || s.variables || []).map((i) => [i.label, i.help, ...(i.options || []).map((o) => o.label)].join(" "))].join(" ");
+export const scaleSearchText = (s) => [s.intro, s.after, ...(s.items || s.variables || []).map((i) => [i.label, i.help, ...(i.options || []).map((o) => o.label)].join(" "))].join(" ");

@@ -1,0 +1,22 @@
+id: mmse
+title: "MMSE — Mini-Mental State Examination (saisie des sous-scores)"
+short: "MMSE"
+type: sum
+order: 3
+tags: "MMSE, Folstein, mini mental, troubles cognitifs, démence, Alzheimer, orientation, rappel, calcul, langage, praxies, GRECO"
+resume: "Score sur 30. Saisir les points obtenus dans chaque domaine (version consensuelle GRECO). Interprétation selon le niveau d'études ; ne fait pas le diagnostic."
+sources: "Folstein MF et al., J Psychiatr Res 1975 ; version française consensuelle GRECO (Kalafat M et al., 2003) ; HAS 2011"
+intro: "Faire passer le MMSE avec le formulaire officiel de votre établissement, puis reporter ici les points par domaine. Patient au calme, lunettes et appareils auditifs en place, hors épisode confusionnel."
+items:
+  - { id: orientation, label: "Orientation dans le temps et dans l'espace (/10)", range: [0, 10] }
+  - { id: apprentissage, label: "Apprentissage : répétition des 3 mots (/3)", range: [0, 3] }
+  - { id: attention, label: "Attention et calcul : 100 − 7 en série, ou épellation à l'envers (/5)", range: [0, 5] }
+  - { id: rappel, label: "Rappel des 3 mots (/3)", range: [0, 3] }
+  - { id: langage, label: "Langage : dénomination, répétition, ordre en 3 temps, lecture, écriture (/8)", range: [0, 8] }
+  - { id: praxies, label: "Praxies constructives : copie des pentagones (/1)", range: [0, 1] }
+ranges:
+  - { min: 27, max: 30, text: "Dans les normes (à interpréter selon l'âge et le niveau d'études).", level: ok }
+  - { min: 21, max: 26, text: "Atteinte légère possible : à confronter à la plainte et à l'autonomie ; consultation mémoire.", level: warn }
+  - { min: 10, max: 20, text: "Atteinte modérée.", level: warn }
+  - { min: 0, max: 9, text: "Atteinte sévère.", level: crit }
+after: "Seuils pathologiques indicatifs (GRECO) : ≤ 22 sans diplôme ou niveau primaire, ≤ 23 niveau brevet, ≤ 24 niveau baccalauréat et plus. Le suivi de l'évolution (perte de 2 à 3 points par an dans la maladie d'Alzheimer) est plus informatif qu'un score isolé."

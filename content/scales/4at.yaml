@@ -1,0 +1,36 @@
+id: 4at
+title: "4AT — dépistage rapide de la confusion"
+short: "4AT"
+type: sum
+order: 2
+tags: "4AT, confusion, delirium, dépistage, vigilance, AMT4, attention, mois à l'envers"
+resume: "4 items, moins de 2 minutes, utilisable sans formation. ≥ 4 = confusion probable ; 1 à 3 = troubles cognitifs possibles."
+sources: "Bellelli G et al., Age Ageing 2014 ; www.the4at.com ; NICE 2023"
+intro: "Utilisable même chez un patient somnolent ou ne pouvant pas parler (item 1)."
+items:
+  - id: vigilance
+    label: "1. Vigilance"
+    options:
+      - { label: "Normale (pleinement éveillé, non agité) ou somnolence légère < 10 s au réveil", points: 0 }
+      - { label: "Nettement anormale (somnolent, difficile à réveiller, ou agité)", points: 4 }
+  - id: amt4
+    label: "2. AMT4 : âge, date de naissance, lieu (nom de l'hôpital ou du bâtiment), année en cours"
+    options:
+      - { label: "Aucune erreur", points: 0 }
+      - { label: "1 erreur", points: 1 }
+      - { label: "2 erreurs ou plus, ou non testable", points: 2 }
+  - id: attention
+    label: "3. Attention : « Dites-moi les mois de l'année à l'envers, en commençant par décembre »"
+    options:
+      - { label: "7 mois ou plus correctement", points: 0 }
+      - { label: "Commence mais moins de 7 mois, ou refuse", points: 1 }
+      - { label: "Non testable (ne peut pas commencer : malade, somnolent, inattentif)", points: 2 }
+  - id: aigu
+    label: "4. Changement aigu ou évolution fluctuante (vigilance, cognition, autres fonctions mentales) depuis 2 semaines, persistant dans les dernières 24 h"
+    options:
+      - { label: "Non", points: 0 }
+      - { label: "Oui", points: 4 }
+ranges:
+  - { min: 0, max: 0, text: "Confusion ou trouble cognitif sévère peu probables (une confusion fluctuante reste possible).", level: ok }
+  - { min: 1, max: 3, text: "Trouble cognitif possible : évaluation complémentaire.", level: warn }
+  - { min: 4, max: 12, text: "Confusion aiguë possible (± trouble cognitif) : chercher la cause, avis médical.", level: crit, link: confusion-aigue }

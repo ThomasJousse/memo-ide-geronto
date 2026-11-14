@@ -1,0 +1,41 @@
+id: acb
+title: "Charge anticholinergique (échelle ACB)"
+short: "Anticholinergiques"
+type: sum
+order: 83
+tags: "anticholinergique, charge anticholinergique, ACB, confusion, chute, démence, rétention, constipation, iatrogénie, déprescription"
+resume: "Additionner les points des médicaments pris. Score ≥ 3 : risque accru de confusion, de chute, de déclin cognitif et de décès ; à réduire."
+sources: "Boustani M et al., Aging Health 2008 ; Anticholinergic Cognitive Burden Scale, mise à jour 2012 ; liste non exhaustive"
+intro: "Cocher les médicaments en cours. Liste des molécules les plus fréquentes en gériatrie ; elle n'est pas exhaustive."
+items:
+  - { id: amitriptyline, label: "Amitriptyline (Laroxyl)", points: 3 }
+  - { id: clomipramine, label: "Clomipramine (Anafranil), imipramine", points: 3 }
+  - { id: paroxetine, label: "Paroxétine (Deroxat)", points: 3 }
+  - { id: hydroxyzine, label: "Hydroxyzine (Atarax)", points: 3 }
+  - { id: dexchlor, label: "Dexchlorphéniramine (Polaramine), prométhazine (Phénergan)", points: 3 }
+  - { id: oxybutynine, label: "Oxybutynine (Ditropan)", points: 3 }
+  - { id: solifenacine, label: "Solifénacine (Vesicare), toltérodine (Detrusitol), trospium", points: 3 }
+  - { id: olanzapine, label: "Olanzapine (Zyprexa)", points: 3 }
+  - { id: quetiapine, label: "Quétiapine (Xeroquel)", points: 3 }
+  - { id: clozapine, label: "Clozapine (Leponex)", points: 3 }
+  - { id: trihexyphenidyle, label: "Trihexyphénidyle (Artane), tropatépine (Lepticur)", points: 3 }
+  - { id: scopolamine, label: "Scopolamine (patch Scopoderm, injectable)", points: 3 }
+  - { id: carbamazepine, label: "Carbamazépine (Tégrétol)", points: 2 }
+  - { id: amantadine, label: "Amantadine (Mantadix)", points: 2 }
+  - { id: cyproheptadine, label: "Cyproheptadine (Périactine)", points: 2 }
+  - { id: alprazolam, label: "Alprazolam, diazépam (benzodiazépines)", points: 1 }
+  - { id: codeine, label: "Codéine, morphine, fentanyl, tramadol", points: 1 }
+  - { id: furosemide, label: "Furosémide", points: 1 }
+  - { id: digoxine, label: "Digoxine", points: 1 }
+  - { id: warfarine, label: "Warfarine", points: 1 }
+  - { id: prednisone, label: "Prednisone, prednisolone, hydrocortisone", points: 1 }
+  - { id: risperidone, label: "Rispéridone, halopéridol", points: 1 }
+  - { id: trazodone, label: "Trazodone, venlafaxine", points: 1 }
+  - { id: cetirizine, label: "Cétirizine, loratadine", points: 1 }
+  - { id: metoprolol, label: "Métoprolol, aténolol, nifédipine", points: 1 }
+  - { id: colchicine, label: "Colchicine", points: 1 }
+  - { id: loperamide, label: "Lopéramide", points: 1 }
+ranges:
+  - { min: 0, max: 0, text: "Pas de charge anticholinergique identifiée.", level: ok }
+  - { min: 1, max: 2, text: "Charge faible : vigilance si troubles cognitifs.", level: warn }
+  - { min: 3, max: 99, text: "Charge élevée (≥ 3) : risque de confusion, chute, déclin cognitif. Proposer une revue de traitement pour substituer ou arrêter.", level: crit, link: medicaments-inappropries }

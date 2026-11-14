@@ -1,0 +1,25 @@
+id: mini-cog
+title: "Mini-Cog — dépistage des troubles cognitifs en 3 minutes"
+short: "Mini-Cog"
+type: sum
+order: 5
+tags: "Mini-Cog, troubles cognitifs, démence, dépistage, test de l'horloge, 3 mots, mémoire"
+resume: "Rappel de 3 mots (0 à 3) + test de l'horloge (0 ou 2). Score sur 5 : 0 à 2 = dépistage positif."
+sources: "Borson S et al., Int J Geriatr Psychiatry 2000 ; mini-cog.com"
+intro: "1) Faire répéter 3 mots sans lien (ex. : drapeau, pomme, bureau). 2) Demander de dessiner une horloge avec tous les chiffres, aiguilles sur 11 h 10. 3) Demander les 3 mots."
+items:
+  - id: mots
+    label: "Rappel des 3 mots"
+    options:
+      - { label: "0 mot", points: 0 }
+      - { label: "1 mot", points: 1 }
+      - { label: "2 mots", points: 2 }
+      - { label: "3 mots", points: 3 }
+  - id: horloge
+    label: "Test de l'horloge"
+    options:
+      - { label: "Normale : tous les chiffres dans le bon ordre et à la bonne place, aiguilles sur 11 et 2", points: 2 }
+      - { label: "Anormale ou refus", points: 0 }
+ranges:
+  - { min: 0, max: 2, text: "Dépistage positif : évaluation cognitive approfondie (MMSE, consultation mémoire).", level: warn }
+  - { min: 3, max: 5, text: "Dépistage négatif (n'exclut pas un trouble débutant si plainte persistante).", level: ok }

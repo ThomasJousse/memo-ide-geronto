@@ -1,0 +1,38 @@
+id: cornell
+title: "Échelle de dépression de Cornell (démence)"
+short: "Cornell"
+type: sum
+order: 12
+tags: "Cornell, dépression, démence, Alzheimer, hétéro-évaluation, humeur, soignant, aidant"
+resume: "19 items cotés sur la semaine écoulée à partir d'un entretien avec le soignant référent puis avec le patient. Score > 10 : dépression probable ; > 18 : dépression majeure probable."
+sources: "Alexopoulos GS et al., Biol Psychiatry 1988 ; version française validée ; HAS 2017"
+intro: "Coter chaque signe observé au cours de la semaine précédente. Ne pas coter un signe dû à une maladie physique ou à un handicap."
+options:
+  - { label: "Non évaluable", points: 0 }
+  - { label: "Absent", points: 0 }
+  - { label: "Léger ou intermittent", points: 1 }
+  - { label: "Sévère", points: 2 }
+items:
+  - { id: a1, label: "Anxiété : expression anxieuse, ruminations, soucis" }
+  - { id: a2, label: "Tristesse : expression triste, voix triste, larmes" }
+  - { id: a3, label: "Absence de réaction aux événements agréables" }
+  - { id: a4, label: "Irritabilité : facilement contrarié, humeur changeante" }
+  - { id: b1, label: "Agitation : ne tient pas en place, se tord les mains, s'arrache les cheveux" }
+  - { id: b2, label: "Ralentissement : lenteur des mouvements, du débit verbal, des réactions" }
+  - { id: b3, label: "Plaintes somatiques multiples (hors symptômes digestifs)" }
+  - { id: b4, label: "Perte d'intérêt : moins impliqué dans les activités habituelles (seulement si changement brutal, < 1 mois)" }
+  - { id: c1, label: "Perte d'appétit : mange moins que d'habitude" }
+  - { id: c2, label: "Perte de poids (cotée 2 si > 2,5 kg en 1 mois)" }
+  - { id: c3, label: "Manque d'énergie : se fatigue facilement, incapable de soutenir une activité" }
+  - { id: d1, label: "Variations de l'humeur dans la journée : symptômes plus marqués le matin" }
+  - { id: d2, label: "Difficultés d'endormissement : se couche plus tard que d'habitude" }
+  - { id: d3, label: "Réveils nocturnes multiples" }
+  - { id: d4, label: "Réveil matinal précoce" }
+  - { id: e1, label: "Idées de suicide : pense que la vie ne vaut pas la peine, souhaite mourir, tentative" }
+  - { id: e2, label: "Autodépréciation : reproches à soi-même, faible estime de soi, sentiment d'échec" }
+  - { id: e3, label: "Pessimisme : anticipation du pire" }
+  - { id: e4, label: "Idées délirantes congruentes à l'humeur : ruine, maladie, perte" }
+ranges:
+  - { min: 0, max: 10, text: "Dépression peu probable (surveiller si 8 à 10).", level: ok }
+  - { min: 11, max: 18, text: "Dépression probable : avis médical.", level: warn, link: depression-sujet-age }
+  - { min: 19, max: 38, text: "Dépression majeure probable : avis médical rapide, évaluer le risque suicidaire.", level: crit, link: depression-sujet-age }

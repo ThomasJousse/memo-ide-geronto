@@ -1,0 +1,25 @@
+id: mini-zarit
+title: "Mini-Zarit — fardeau de l'aidant"
+short: "Mini-Zarit"
+type: sum
+order: 70
+tags: "Zarit, mini-Zarit, aidant, fardeau, épuisement, répit, proche aidant"
+resume: "7 questions posées à l'aidant principal. Score sur 7 : 0 à 1,5 fardeau léger, 2 à 3,5 modéré, 4 et plus sévère."
+sources: "Zarit SH et al., 1980 ; Revel-Delhom C et al. (version mini-Zarit), 2006 ; HAS 2010 Maladie d'Alzheimer : suivi médical des aidants"
+intro: "« Le fait de vous occuper de votre proche entraîne-t-il… » Répondre jamais, parfois, ou assez souvent à presque tout le temps."
+options:
+  - { label: "Jamais", points: 0 }
+  - { label: "Parfois", points: 0.5 }
+  - { label: "Assez souvent à presque tout le temps", points: 1 }
+items:
+  - { id: q1, label: "Des difficultés dans votre vie familiale ?" }
+  - { id: q2, label: "Des difficultés dans vos relations avec vos amis, vos loisirs ou votre travail ?" }
+  - { id: q3, label: "Un retentissement sur votre santé (physique ou psychique) ?" }
+  - { id: q4, label: "Avez-vous le sentiment de ne plus reconnaître votre proche ?" }
+  - { id: q5, label: "Avez-vous peur pour l'avenir de votre proche ?" }
+  - { id: q6, label: "Souhaitez-vous être (davantage) aidé(e) pour vous occuper de votre proche ?" }
+  - { id: q7, label: "Ressentez-vous une charge en vous occupant de votre proche ?" }
+ranges:
+  - { min: 0, max: 1.5, text: "Fardeau léger.", level: ok }
+  - { min: 2, max: 3.5, text: "Fardeau modéré : proposer information, soutien, solutions de répit.", level: warn, link: epuisement-aidant }
+  - { min: 4, max: 7, text: "Fardeau sévère : risque d'épuisement, consultation de l'aidant, répit en urgence.", level: crit, link: epuisement-aidant }

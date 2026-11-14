@@ -1,0 +1,25 @@
+id: cha2ds2va
+title: "CHA₂DS₂-VA — risque d'AVC dans la fibrillation atriale"
+short: "CHA2DS2-VA"
+type: sum
+order: 81
+tags: "CHA2DS2-VA, CHA2DS2-VASc, fibrillation atriale, FA, AVC, anticoagulation, risque embolique"
+resume: "Score ESC 2024 (sans le critère sexe). ≥ 2 : anticoagulation recommandée ; 1 : à envisager. Tout patient de 75 ans ou plus a au moins 2 points."
+sources: "ESC 2024 Fibrillation atriale (Van Gelder IC et al., Eur Heart J 2024)"
+items:
+  - { id: c, label: "C — Insuffisance cardiaque (ou dysfonction ventriculaire gauche)", points: 1 }
+  - { id: h, label: "H — Hypertension artérielle", points: 1 }
+  - id: age
+    label: "A — Âge"
+    options:
+      - { label: "< 65 ans", points: 0 }
+      - { label: "65 – 74 ans", points: 1 }
+      - { label: "≥ 75 ans", points: 2 }
+  - { id: d, label: "D — Diabète", points: 1 }
+  - { id: s, label: "S — Antécédent d'AVC, d'AIT ou d'embolie artérielle", points: 2 }
+  - { id: v, label: "V — Maladie vasculaire (infarctus, artériopathie, plaque aortique)", points: 1 }
+ranges:
+  - { min: 0, max: 0, text: "Risque faible : pas d'anticoagulation.", level: ok }
+  - { min: 1, max: 1, text: "Anticoagulation à envisager.", level: warn }
+  - { min: 2, max: 8, text: "Anticoagulation recommandée (AOD de préférence), en évaluant le risque hémorragique et la fragilité.", level: crit }
+after: "Le risque de chute n'est pas en soi une contre-indication à l'anticoagulation : le bénéfice reste supérieur au risque dans la plupart des cas."

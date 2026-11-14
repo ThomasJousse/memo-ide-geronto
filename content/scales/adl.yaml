@@ -1,0 +1,50 @@
+id: adl
+title: "ADL de Katz — activités de base de la vie quotidienne"
+short: "ADL"
+type: sum
+order: 20
+tags: "ADL, Katz, autonomie, dépendance, activités de la vie quotidienne, toilette, habillage, continence, repas, transferts"
+resume: "6 activités cotées 1 (autonome), 0,5 (aide partielle) ou 0 (dépendant). Score sur 6 : toute baisse est significative et doit être expliquée."
+sources: "Katz S et al., JAMA 1963 ; version française utilisée en gériatrie (SFGG)"
+intro: "Coter ce que la personne fait réellement, pas ce qu'elle pourrait faire."
+items:
+  - id: toilette
+    label: "Hygiène corporelle"
+    options:
+      - { label: "Autonome", points: 1 }
+      - { label: "Aide partielle (une partie du corps)", points: 0.5 }
+      - { label: "Dépendant", points: 0 }
+  - id: habillage
+    label: "Habillage"
+    options:
+      - { label: "Autonome pour choisir les vêtements et s'habiller", points: 1 }
+      - { label: "Aide partielle (chaussures, boutons)", points: 0.5 }
+      - { label: "Dépendant", points: 0 }
+  - id: wc
+    label: "Aller aux toilettes"
+    options:
+      - { label: "Autonome pour aller aux toilettes, se déshabiller, se rhabiller", points: 1 }
+      - { label: "Doit être aidé", points: 0.5 }
+      - { label: "Ne va pas aux toilettes", points: 0 }
+  - id: transfert
+    label: "Locomotion, transferts"
+    options:
+      - { label: "Autonome", points: 1 }
+      - { label: "A besoin d'aide", points: 0.5 }
+      - { label: "Grabataire", points: 0 }
+  - id: continence
+    label: "Continence"
+    options:
+      - { label: "Continent", points: 1 }
+      - { label: "Incontinence occasionnelle", points: 0.5 }
+      - { label: "Incontinent", points: 0 }
+  - id: repas
+    label: "Repas"
+    options:
+      - { label: "Mange seul", points: 1 }
+      - { label: "Aide pour couper la viande, peler les fruits", points: 0.5 }
+      - { label: "Dépendant", points: 0 }
+ranges:
+  - { min: 6, max: 6, text: "Autonome pour les activités de base.", level: ok }
+  - { min: 3, max: 5.5, text: "Dépendance partielle : préciser les aides nécessaires (plan d'aide, APA).", level: warn }
+  - { min: 0, max: 2.5, text: "Dépendance importante : aides humaines quotidiennes, évaluer le maintien à domicile.", level: crit }

@@ -1,0 +1,27 @@
+id: epworth
+title: "Échelle de somnolence d'Epworth"
+short: "Epworth"
+type: sum
+order: 91
+tags: "Epworth, somnolence, apnées du sommeil, SAOS, sommeil, endormissement"
+resume: "8 situations, chance de s'assoupir cotée de 0 à 3. Score > 10 = somnolence diurne excessive (rechercher un syndrome d'apnées du sommeil, un médicament)."
+sources: "Johns MW, Sleep 1991 ; version française validée ; SFRMS"
+intro: "« Quelle chance avez-vous de vous assoupir ou de vous endormir dans les situations suivantes ? »"
+options:
+  - { label: "Ne s'endort jamais", points: 0 }
+  - { label: "Faible chance", points: 1 }
+  - { label: "Chance moyenne", points: 2 }
+  - { label: "Forte chance", points: 3 }
+items:
+  - { id: lire, label: "Assis en train de lire" }
+  - { id: tv, label: "En regardant la télévision" }
+  - { id: public, label: "Assis, inactif, dans un lieu public (cinéma, réunion)" }
+  - { id: passager, label: "Passager d'une voiture roulant sans arrêt pendant une heure" }
+  - { id: allonge, label: "Allongé l'après-midi quand les circonstances le permettent" }
+  - { id: parler, label: "Assis en parlant avec quelqu'un" }
+  - { id: repas, label: "Assis au calme après un repas sans alcool" }
+  - { id: volant, label: "Au volant d'une voiture immobilisée quelques minutes dans un embouteillage" }
+ranges:
+  - { min: 0, max: 10, text: "Pas de somnolence diurne excessive.", level: ok }
+  - { min: 11, max: 15, text: "Somnolence modérée : chercher apnées du sommeil, médicaments sédatifs, dette de sommeil.", level: warn, link: sommeil }
+  - { min: 16, max: 24, text: "Somnolence sévère : avis médical (risque d'accident).", level: crit, link: sommeil }

@@ -1,0 +1,19 @@
+id: isar
+title: "ISAR — repérage de la personne âgée à risque aux urgences"
+short: "ISAR"
+type: sum
+order: 42
+tags: "ISAR, urgences, repérage, risque, réhospitalisation, perte d'autonomie, équipe mobile de gériatrie"
+resume: "6 questions oui/non. Score ≥ 2 : personne à risque de déclin fonctionnel ou de réhospitalisation, à orienter vers l'équipe mobile de gériatrie."
+sources: "McCusker J et al., J Am Geriatr Soc 1999 ; validation française ; SFGG"
+intro: "Cocher les réponses « oui ». Questions posées au patient ou à son entourage."
+items:
+  - { id: q1, label: "Avant cette maladie, aviez-vous besoin d'une aide régulière à domicile ?" }
+  - { id: q2, label: "Depuis cette maladie, avez-vous besoin de plus d'aide qu'avant ?" }
+  - { id: q3, label: "Avez-vous été hospitalisé(e) une nuit ou plus au cours des 6 derniers mois ?" }
+  - { id: q4, label: "Avez-vous des problèmes de vue (même avec des lunettes) ?" }
+  - { id: q5, label: "Avez-vous des problèmes sérieux de mémoire ?" }
+  - { id: q6, label: "Prenez-vous plus de trois médicaments différents par jour ?" }
+ranges:
+  - { min: 0, max: 1, text: "Risque faible.", level: ok }
+  - { min: 2, max: 6, text: "Personne à risque : évaluation gériatrique (équipe mobile), anticipation de la sortie.", level: warn }

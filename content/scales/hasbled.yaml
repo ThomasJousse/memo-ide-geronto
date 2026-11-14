@@ -1,0 +1,21 @@
+id: hasbled
+title: "HAS-BLED — risque hémorragique sous anticoagulant"
+short: "HAS-BLED"
+type: sum
+order: 82
+tags: "HAS-BLED, risque hémorragique, saignement, anticoagulant, fibrillation atriale, AVK, AOD"
+resume: "Score ≥ 3 : risque hémorragique élevé. Il sert à corriger les facteurs modifiables et à surveiller, pas à contre-indiquer l'anticoagulation."
+sources: "Pisters R et al., Chest 2010 ; ESC 2024 Fibrillation atriale"
+items:
+  - { id: h, label: "H — Hypertension non contrôlée (PAS > 160 mmHg)", points: 1 }
+  - { id: rein, label: "A — Fonction rénale anormale (dialyse, greffe, créatinine ≥ 200 µmol/L)", points: 1 }
+  - { id: foie, label: "A — Fonction hépatique anormale (cirrhose, bilirubine > 2 N, transaminases > 3 N)", points: 1 }
+  - { id: s, label: "S — Antécédent d'AVC", points: 1 }
+  - { id: b, label: "B — Saignement majeur ou prédisposition (anémie, thrombopénie)", points: 1 }
+  - { id: l, label: "L — INR instable (si AVK)", points: 1 }
+  - { id: e, label: "E — Âge > 65 ans", points: 1 }
+  - { id: med, label: "D — Médicaments favorisant le saignement (antiagrégant, AINS)", points: 1 }
+  - { id: alcool, label: "D — Alcool (≥ 8 verres par semaine)", points: 1 }
+ranges:
+  - { min: 0, max: 2, text: "Risque hémorragique non élevé.", level: ok }
+  - { min: 3, max: 9, text: "Risque hémorragique élevé : contrôler la PA, arrêter AINS et antiagrégants inutiles, réduire l'alcool, surveiller rein et hémoglobine. Ne contre-indique pas l'anticoagulation à lui seul.", level: warn }
