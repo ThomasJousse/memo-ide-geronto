@@ -30,7 +30,7 @@ Plan rédigé le 14/11/2026. Nom de travail : **Mémo IDE Géronto** (à changer
 - **Coque native** : **Capacitor 7** (Android). Plugins : StatusBar, SplashScreen, App (bouton retour), Preferences (favoris, taille de texte).
 - **Build APK** : **GitHub Actions** sur `ubuntu-latest` (Java 17 + Android SDK via le wrapper Gradle). Aucune installation Android Studio sur ton PC.
 - **Distribution** : GitHub Releases. L'APK signé est attaché à chaque release ; Ophélie l'installe depuis son téléphone (autorisation « sources inconnues » une seule fois). Pas de Google Play.
-- **Version web** : le même build déployé sur GitHub Pages en PWA (installable sur iPhone / PC, hors ligne via service worker). Utile en cas de changement de téléphone.
+- **Version web** : le même build en PWA (installable sur iPhone / PC, hors ligne via service worker). Utile en cas de changement de téléphone. GitHub Pages est refusé sur un dépôt privé en plan gratuit (constaté le 14/11) : le workflow reste en déclenchement manuel ; au moment voulu, soit passer le dépôt en public, soit déployer sur Netlify (gratuit, compatible dépôt privé).
 
 ### 2.2 Pourquoi pas Flutter, React Native ou Kotlin natif
 
@@ -181,7 +181,7 @@ Chaque phase = 1 ou plusieurs sessions Claude Code dans le dépôt. Durée indic
 | Phase | Contenu | Livrable | Durée | Modèle |
 |---|---|---|---|---|
 | **0. Cadrage** | Ce plan, validation du périmètre et du nom avec Ophélie | PLAN-IMPLANTATION.md | fait | Opus 5.5 élevé (rédigé ici par Fable 5.1) |
-| **1. Socle technique** | Dépôt GitHub, Vite, Capacitor Android, icône et splash, workflow APK debug, GitHub Pages | Un APK « Hello » installable sur son téléphone | 2 à 3 h | Sonnet 5.5 moyen |
+| **1. Socle technique** | Dépôt GitHub, Vite, Capacitor Android, icône et splash, workflows APK debug et release signée, keystore | **Fait le 14/11/2026** : release v0.1.0 avec APK signé sur github.com/ThomasJousse/memo-ide-geronto | 2 à 3 h | Sonnet 5.5 moyen (fait par Fable 5.1) |
 | **2. Moteur** | Portage du moteur du Mémo (recherche, synonymes, fiches, chapitres, récents, mode sombre), pipeline Markdown→JSON, moteur d'échelles YAML, calculateurs, favoris, taille de texte, « mise à jour disponible » | App fonctionnelle avec 5 fiches de test et 2 échelles | 4 à 6 h | Sonnet 5.5 moyen (Opus 5.5 pour le moteur d'échelles) |
 | **3. Contenu — lot A** | Ch. 1 Situations aiguës + Ch. 2 Syndromes gériatriques | 65 fiches, sources citées | 6 à 8 h | Opus 5.5 élevé |
 | **4. Contenu — lot B** | Ch. 4 Échelles (35 YAML + fiches) + Ch. 11 Calculateurs | Échelles interactives validées sur cas tests | 6 à 8 h | Opus 5.5 élevé |
